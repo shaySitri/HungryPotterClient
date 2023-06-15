@@ -85,10 +85,15 @@ console.log(shared_data);
 new Vue({
   router,
   data() {
+    const store =
+    {
+      shared_data: shared_data,
+      server_domain: "http://localhost:3000"
+    }
     return {
-      store: shared_data,
-    };
-  },
+      store
+  };
+s},
   methods: {
     toast(title, content, variant = null, append = false) {
       this.$bvToast.toast(`${content}`, {
