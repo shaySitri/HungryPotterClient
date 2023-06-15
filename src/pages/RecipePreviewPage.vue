@@ -56,13 +56,7 @@ export default {
             this.$router.replace("/NotFound");
             return;
         }
-        let {
-            id, title, readyInMinutes, image, popularity, vegan, vegetarian, glutenFree, favorite, watched
-        } = response.data;
 
-        let details = {
-            id, title, readyInMinutes, image, popularity, vegan, vegetarian, glutenFree, favorite, watched
-        }
 
         this.previewDetails = response.data;
 
