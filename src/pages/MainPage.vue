@@ -2,36 +2,29 @@
   <div class="container">
     <h1 class="title">Main Page</h1>
     <h1>{{ username }}</h1>
-    <!-- <RecipePreviewList title="Randome Recipes" class="RandomRecipes center" /> -->
-    <router-link v-if="!$root.store.username" to="/login" tag="button">You need to Login to vue this</router-link>
-    {{ !$root.store.username }}
-    <!-- <RecipePreviewList
-      title="Last Viewed Recipes"
-      :class="{
-        RandomRecipes: true,
-        blur: !$root.store.username,
-        center: true
-      }"
-      disabled
-    ></RecipePreviewList> -->
-    <!-- <div
-      style="position: absolute;top: 70%;left: 50%;transform: translate(-50%, -50%);"
-    >
-      Centeredasdasdad
-    </div>-->
+    <recipe-preview-list :recipes="randomRecipes"></recipe-preview-list>    
+    <div v-if="lastWatched">
+      <recipe-preview-list :recipes="lastWatched"></recipe-preview-list>
+    </div>
+    <div v-else>
+      <router-link v-if="!$root.store.username" to="/login" tag="button">You need to Login to vue this</router-link>
+      {{ !$root.store.username }}
   </div>
+</div>
 </template>
 
 <script>
-import RecipePreviewList from "../components/RecipePreviewList";
+import RecipePreviewList from '../components/RecipePreviewList.vue';
 export default {
-  // components: {
-  //   RecipePreviewList,
-  // },
+  components: {
+    RecipePreviewList
+  },
   name: "Login",
   data(){
   return {
-    username: ""
+    username: "",
+    randomRecipes: "",
+    lastWatched: ""
     };
   },
 mounted()
@@ -39,7 +32,37 @@ mounted()
   if (this.$root.store.shared_data.username != "")
   {
     this.username = this.$root.store.shared_data.username
+    this.getLastWatched();
   }
+  this.random()
+
+},
+methods:
+{
+    async random() {
+    try {
+        const response = await this.axios.get(
+        this.$root.store.server_domain + "/randomRecipes");
+        
+        let arrayRecipes = response.data.randRecipes;
+        this.randomRecipes = arrayRecipes;
+    } catch (error) {
+
+        console.log(error);
+    }
+    },
+    async getLastWatched() {
+    try {
+        const response = await this.axios.get(
+        this.$root.store.server_domain + "/users/lastViews");
+        let arrayWatched = response.data;
+        this.lastWatched = arrayWatched;
+    } catch (error) {
+
+        console.log(error);
+    }
+    },      
+
 }
 };
 </script>
