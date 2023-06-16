@@ -12,6 +12,9 @@ Vue.use(VueRouter);
 const router = new VueRouter({
   routes,
 });
+import { FormCheckboxPlugin } from 'bootstrap-vue'
+
+Vue.use(FormCheckboxPlugin)
 
 import Vuelidate from "vuelidate";
 import "bootstrap/dist/css/bootstrap.css";
