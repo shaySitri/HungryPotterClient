@@ -107,8 +107,8 @@ export default {
         );
         // console.log(response);
         // this.$root.loggedIn = true;
-        console.log(this.$root.store.login);
-        this.$root.store.login(this.form.username);
+        console.log(this.$root.store.shared_data.login);
+        this.$root.store.shared_data.login(this.form.username);
         this.$router.push("/");
       } catch (err) {
         console.log(err.response);

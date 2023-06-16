@@ -23,9 +23,9 @@ const routes = [
     component: () => import("./pages/SearchPage"),
   },
   {
-    path: "/recipe/preview/:recipeId",
-    name: "recipePreview",
-    component: () => import("./pages/RecipePreviewPage"),
+    path: "/random",
+    name: "RandomRecipes",
+    component: () => import("./components/RecipePreviewList.vue"),
   },
 
   {
