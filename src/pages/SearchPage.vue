@@ -72,14 +72,24 @@
       <option>Time</option>
     </select>
 
-    <button @click="search"> Search </button>
+    <button @click="search" :disabled="!query"> Search </button>
+
+    <div>
+      <recipe-preview-list :recipes="results"></recipe-preview-list>
+      <div v-if="noRes">
+        No Results Found.
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-
+import RecipePreviewList from '../components/RecipePreviewList.vue';
 export default {
-
+  name: "Search",
+  components: {
+    RecipePreviewList
+  },
   data() {
     return {
       query: "",
@@ -89,7 +99,8 @@ export default {
       intolerance: "",
       sort: "",
       filters: "",
-      results: []
+      results: [],
+      noRes: false
       }
     },
     mounted()
@@ -112,18 +123,9 @@ export default {
         console.log(error);
       }
       },
-      search: function()
+      search: async function()
       {
-
-      },
-
-      validators: function()
-      {
-
-      },
-
-      apiSearch: async function()
-      {
+        this.noRes = false;
           try {
           const response =  await this.axios.get(this.$root.store.server_domain + "/search",{
           params:
@@ -138,7 +140,12 @@ export default {
           );
 
           this.results = response.data;
-          console.log(response.data)
+          
+          if (this.results.length == 0)
+          {
+            this.noRes = true
+          }
+          
         } catch (error) {
           console.log(error);
         }
