@@ -3,9 +3,8 @@
     <div>
 
         <div>
-        <b-button v-b-modal.modal-1>Add New Recipe</b-button>
-
-        <b-modal id="modal-1" title="Add New Recipe">
+        <b-button v-b-modal.modal-1 >Add New Recipe</b-button>
+        <b-modal id="modal-1" title="Add New Recipe" hide-footer>
             <form>
                 Type:
                 <b-form-select v-model="type" :options="typeOptions"></b-form-select> <br>
@@ -53,13 +52,14 @@
                     <textarea></textarea>
                 
                 </div>
-                
-
-                
-
-
-
             </form>
+            
+            <div>
+                <b-button @click="addRecipe()">Add Recipe</b-button>
+            </div>
+
+            <b-alert show variant="danger" v-show="dangerAlert">Danger Alert</b-alert>
+
         </b-modal>
         </div>
 
@@ -97,6 +97,7 @@ export default {
     glutenFree: false,
     servings: "1",
     optionalDescription: "",
+    dangerAlert: false
     };
   },
   methods:
@@ -133,7 +134,45 @@ export default {
             this.instructions.splice(index , 1);
         }
     },
+    async addRecipe()
+    {
+        let recipeIng = ""
+        for (let i = 0; i < this.ingredients.length - 1; i++)
+        {  
+            let ing = this.ingredients.at(i)
+            recipeIng = recipeIng + ing.name + "-" + ing.quantity + "-" + ing.unit
+            if (i != this.ingredients.length - 1)
+            {
+                recipeIng = recipeIng + ","
+            }
+        }
+        
+        let recipeInstructions = this.instructions.join('-')
+        try {
+        const response = await this.axios.post(
+          this.$root.store.server_domain + "/users/addRecipe", 
+          {
+            title: this.title,
+            readyInMinutes: this.readyInMintes,
+            image: this.image,
+            vegan: this.vegan,
+            vegeterian: this.vegeterian,
+            glutenFree: this.glutenFree,
+            ingredients: recipeIng,
+            instructions: recipeInstructions,
+            servings: this.servings,
+            type: this.type,
+            optionalDescription: this.optionalDescription
+          }
+          );
+        // console.log(response);
+      } catch (err) {
+        console.log(err.response);
+        this.dangerAlert = true
+        
+      }
 
+    },
   }
 
 };
