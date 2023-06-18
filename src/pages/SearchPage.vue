@@ -1,5 +1,3 @@
-
-
 <template>
   <div>
     <h>Search Page</h>

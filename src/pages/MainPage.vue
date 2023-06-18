@@ -3,6 +3,7 @@
     <h1 class="title">Main Page</h1>
     <h1>{{ username }}</h1>
     <recipe-preview-list :recipes="randomRecipes"></recipe-preview-list>    
+    
     <div v-if="lastWatched">
       <recipe-preview-list :recipes="lastWatched"></recipe-preview-list>
     </div>
@@ -10,21 +11,29 @@
       <router-link v-if="!$root.store.username" to="/login" tag="button">You need to Login to vue this</router-link>
       {{ !$root.store.username }}
   </div>
+
+  <button @click="show"> Add Recipe </button>
+  <new-recipe-modal v-show="showAddRecipe"></new-recipe-modal>
+  
+
 </div>
 </template>
 
 <script>
+import NewRecipeModal from '../components/NewRecipeModal.vue';
 import RecipePreviewList from '../components/RecipePreviewList.vue';
 export default {
   components: {
-    RecipePreviewList
+    RecipePreviewList,
+    NewRecipeModal,
   },
   name: "Login",
   data(){
   return {
     username: "",
     randomRecipes: "",
-    lastWatched: ""
+    lastWatched: "",
+    showAddRecipe: false,
     };
   },
 mounted()
@@ -61,7 +70,12 @@ methods:
 
         console.log(error);
     }
-    },      
+    }, 
+    show: function()
+    {
+      this.showAddRecipe = !this.showAddRecipe
+      
+    }
 
 }
 };

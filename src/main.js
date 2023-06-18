@@ -7,14 +7,19 @@ import routes from "./routes";
 import VueRouter from "vue-router";
 import VueCookies from "vue-cookies";
 Vue.use(VueCookies);
+import { ModalPlugin } from 'bootstrap-vue'
+Vue.use(ModalPlugin)
 
 Vue.use(VueRouter);
 const router = new VueRouter({
   routes,
 });
-import { FormCheckboxPlugin } from 'bootstrap-vue'
+import { BFormCheckboxGroup } from 'bootstrap-vue'
+Vue.component('b-form-checkbox-group', BFormCheckboxGroup)
+import { BootstrapVueIcons } from 'bootstrap-vue'
+import 'bootstrap-vue/dist/bootstrap-vue-icons.min.css'
 
-Vue.use(FormCheckboxPlugin)
+Vue.use(BootstrapVueIcons)
 
 import Vuelidate from "vuelidate";
 import "bootstrap/dist/css/bootstrap.css";
@@ -30,6 +35,8 @@ import {
   AlertPlugin,
   ToastPlugin,
   LayoutPlugin,
+  FormFilePlugin,
+  FormCheckboxPlugin,
 } from "bootstrap-vue";
 [
   FormGroupPlugin,
@@ -42,6 +49,9 @@ import {
   AlertPlugin,
   ToastPlugin,
   LayoutPlugin,
+  FormFilePlugin,
+  FormCheckboxPlugin,
+
 ].forEach((x) => Vue.use(x));
 Vue.use(Vuelidate);
 axios.defaults.withCredentials=true;
