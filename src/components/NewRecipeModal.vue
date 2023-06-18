@@ -15,8 +15,8 @@
                 <input v-model="readyInMintes" type="number" min="1" >
                 Minutes <br>
 
-                Image:
-                <b-form-file accept="image/*" v-model="image"></b-form-file> <br>
+                Image Url:
+                <input v-model="image" type="text" >  <br>
 
                 Servings: 
                 <input v-model="servings" type="number" min="1" >  <br>
@@ -36,13 +36,24 @@
                     <ingredient :ing='item' :index="i"
                     @add-new-ing="addNewIng($event)" @del-ing="delIng($event)"> </ingredient>
                 </div>
-
-                <!-- // @:new-ing="addIng($event)" :ingId="index" :ingredient="item" @del-ing="delIng($event) -->
                 
 
                 Instructions:
+                <div v-for="(inst,index) in instructions" :key="inst">
+                    {{ index + 1 }}<input type="text" required>
+                    <b-icon-plus-circle  scale="1.2" @click="addInstrction()" v-show="!disable"></b-icon-plus-circle>  
+                    <b-icon-x-circle v-show="index==instructions.length-1" scale="1.2" @click="delInstruction(index)"></b-icon-x-circle>  
 
-                Optional Description:
+                </div>
+
+
+                <br>
+                <div v-show="type=='Family'">
+                    Optional Description: <br>
+                    <textarea></textarea>
+                
+                </div>
+                
 
                 
 
@@ -82,7 +93,7 @@ export default {
         }
     
     ],
-    instructions: [],
+    instructions: [" "],
     glutenFree: false,
     servings: "1",
     optionalDescription: "",
@@ -107,6 +118,19 @@ export default {
         if (this.ingredients.length > 1)
         {
             this.ingredients.splice(index , 1);
+        }
+    },
+
+    addInstrction()
+    {
+        this.instructions.push("")
+    },
+    delInstruction(index)
+    {        
+        // find index
+        if (this.instructions.length > 1)
+        {
+            this.instructions.splice(index , 1);
         }
     },
 
