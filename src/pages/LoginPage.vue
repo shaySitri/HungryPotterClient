@@ -97,8 +97,6 @@ export default {
         const response = await this.axios.post(
           // "https://test-for-3-2.herokuapp.com/user/Login",
           this.$root.store.server_domain +"/Login",
-          // "http://132.72.65.211:80/Login",
-          // "http://132.73.84.100:80/Login",
 
           {
             username: this.form.username,
@@ -107,8 +105,12 @@ export default {
         );
         // console.log(response);
         // this.$root.loggedIn = true;
+        console.log(this.username)
+
         console.log(this.$root.store.shared_data.login);
-        this.$root.store.shared_data.login(this.form.username);
+        let firstname = await this.axios.get(
+        this.$root.store.server_domain +"/users/privateName")
+        this.$root.store.shared_data.login(this.form.username, firstname);
         this.$router.push("/");
       } catch (err) {
         console.log(err.response);

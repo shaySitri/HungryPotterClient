@@ -124,6 +124,16 @@ export default {
       search: async function()
       {
         this.noRes = false;
+        let request =
+        {
+          query: this.query,
+              cuisine: this.cuisine.toString(),
+              diet: this.diet.toString(),
+              intolerances: this.intolerance.toString(),
+              number: this.numOfRes,
+              sort: this.sort
+        }
+        console.log(request)
           try {
           const response =  await this.axios.get(this.$root.store.server_domain + "/search",{
           params:

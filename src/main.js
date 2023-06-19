@@ -20,6 +20,8 @@ import { BootstrapVueIcons } from 'bootstrap-vue'
 import 'bootstrap-vue/dist/bootstrap-vue-icons.min.css'
 
 Vue.use(BootstrapVueIcons)
+import { BNavbar } from 'bootstrap-vue'
+Vue.component('b-navbar', BNavbar)
 
 import Vuelidate from "vuelidate";
 import "bootstrap/dist/css/bootstrap.css";
@@ -84,17 +86,24 @@ Vue.config.productionTip = false;
 
 const shared_data = {
   username: localStorage.username,
-  login(username) {
+  firstname: localStorage.firstname,
+  login(username, firstname) {
     localStorage.setItem("username", username);
     this.username = username;
-    console.log("login", this.username);
+    localStorage.setItem("firstname", firstname.data);
+    this.firstname = firstname.data
+
+    console.log("login", this.username, this.firstname);
   },
   logout() {
     console.log("logout");
     localStorage.removeItem("username");
+    localStorage.removeItem("firstname");
     this.username = undefined;
+    this.firstname = undefined;
   },
 };
+
 console.log(shared_data);
 // Vue.prototype.$root.store = shared_data;
 

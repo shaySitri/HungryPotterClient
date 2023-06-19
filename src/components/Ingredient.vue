@@ -12,6 +12,9 @@
             />
             <br>             
 
+
+
+
           <input  type="number" min="1"  placeholder="Enter ingredient quantity" id="quantity"
           v-model="ing.quantity"   :disabled="disable"
           >
@@ -76,6 +79,7 @@ export default {
     this.setUnit();
   },
   methods: {
+
     setUnit: async function()
       {
         try {
