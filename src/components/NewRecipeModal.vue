@@ -39,7 +39,7 @@
 
                 Instructions:
                 <div v-for="(inst,index) in instructions" :key="inst">
-                    {{ index + 1 }}<input type="text" required>
+                    {{ index + 1 }}<input type="text" required v-model="inst.instruction">
                     <b-icon-plus-circle  scale="1.2" @click="addInstrction()" v-show="!disable"></b-icon-plus-circle>  
                     <b-icon-x-circle v-show="index==instructions.length-1" scale="1.2" @click="delInstruction(index)"></b-icon-x-circle>  
 
@@ -93,11 +93,14 @@ export default {
         }
     
     ],
-    instructions: [" "],
+    instructions: [{
+        instruction: ""
+    }],
     glutenFree: false,
     servings: "1",
-    optionalDescription: "",
-    dangerAlert: false
+    optionalDescription: " ",
+    dangerAlert: false,
+    currentInstruction: ""
     };
   },
   methods:
@@ -124,7 +127,7 @@ export default {
 
     addInstrction()
     {
-        this.instructions.push("")
+        this.instructions.push(" ")
     },
     delInstruction(index)
     {        
@@ -137,43 +140,36 @@ export default {
     async addRecipe()
     {
         let recipeIng = ""
-        for (let i = 0; i < this.ingredients.length - 1; i++)
-        {  
-            let ing = this.ingredients.at(i)
-            recipeIng = recipeIng + ing.name + "-" + ing.quantity + "-" + ing.unit
-            if (i != this.ingredients.length - 1)
-            {
-                recipeIng = recipeIng + ","
-            }
-        }
+        this.ingredients.pop()
+        console.log(recipeIng)
         
         let recipeInstructions = this.instructions.join('-')
         try {
-        const response = await this.axios.post(
-          this.$root.store.server_domain + "/users/addRecipe", 
-          {
-            title: this.title,
-            readyInMinutes: this.readyInMintes,
-            image: this.image,
-            vegan: this.vegan,
-            vegeterian: this.vegeterian,
-            glutenFree: this.glutenFree,
-            ingredients: recipeIng,
-            instructions: recipeInstructions,
-            servings: this.servings,
-            type: this.type,
-            optionalDescription: this.optionalDescription
-          }
-          );
-        // console.log(response);
-      } catch (err) {
-        console.log(err.response);
-        this.dangerAlert = true
-        
-      }
+            const response = await this.axios.post(
+            this.$root.store.server_domain + "/users/addRecipe", 
+            {
+                title: this.title,
+                readyInMinutes: this.readyInMintes,
+                image: this.image,
+                vegan: this.vegan == false ? 0 : 1,
+                vegetarian: this.vegetarian == false ? 0 : 1,
+                glutenFree: this.glutenFree == false ? 0 : 1,
+                ingredients: recipeIng,
+                instructions: recipeInstructions,
+                servings: this.servings,
+                type: this.type,
+                optionalDescription: this.optionalDescription
+            }
+            );
+
+            console.log(response);
+        } catch (err) {
+            console.log("RES", err.response);
+            this.dangerAlert = true
+        }
 
     },
-  }
+  },
 
 };
 </script>
@@ -181,3 +177,4 @@ export default {
 <style>
 
 </style>
+
