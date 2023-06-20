@@ -1,5 +1,42 @@
 <template>
+
     <div>
+        <b-card
+      :title=recipe.title
+      :img-src=recipe.image
+      :image-alt=recipe.title
+      img-top
+      style="max-width: 30rem;"
+    >
+    <table align="center">
+    <tr>
+        <!-- vegan -->
+        <th v-for="badge in nutritionBagesArray" :key="badge">
+            <img :src=badge width="50" height="50" hspace="10">
+        </th> 
+    </tr>
+    <tr>
+        
+        <td><b-icon-alarm font-scale="2.5"></b-icon-alarm></td>
+        <td>
+            {{  recipe.readyInMinutes }} Minutes
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <b-icon-eye font-scale="2" opacity="0.7" v-show="!recipe.watched"></b-icon-eye>
+        </td>
+        <td>
+            <b-icon-star font-scale="2" opacity="0.7" v-show="!recipe.favorite"></b-icon-star>
+        </td>
+    </tr>
+
+    </table>
+    
+    </b-card>
+    </div>
+    <!-- <div>
   <b-card
     no-body
     style="max-width: 20rem;"
@@ -35,7 +72,7 @@
 
     <b-card-img src="https://placekitten.com/480/210" alt="Image" bottom></b-card-img>
   </b-card>
-</div>
+</div> -->
   <!-- <div>
     
     <h1> {{ recipe.title }}</h1>
@@ -74,17 +111,37 @@ export default {
     this.axios.get(this.recipe.image).then((i) => {
       this.image_load = true;
     });
+    this.setLogos();
     },
     data() {
         return {
-        image_load: false
+        image_load: false,
+        nutritionBagesArray: [],
         };
     },
     props: {
         recipe: {
         type: Object,
         required: true
-        }
+        },
+        favorite: {
+        type: Boolean,
+        required: true
+        },
+    },
+    methods:
+    {
+        setLogos()
+        {
+            if (this.recipe.vegan == true)
+            this.nutritionBagesArray.push("images/vegan0.png")
+            if (this.recipe.vegetarian == true)
+            this.nutritionBagesArray.push("images/vegan0.png")
+            if (this.recipe.glutenFree == true)
+            this.nutritionBagesArray.push("images/vegan0.png")
+            else
+            this.nutritionBagesArray.push("images/vegan0.png")
+        },
     }
 };
 
