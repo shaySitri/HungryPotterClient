@@ -22,6 +22,8 @@ import 'bootstrap-vue/dist/bootstrap-vue-icons.min.css'
 Vue.use(BootstrapVueIcons)
 import { BNavbar } from 'bootstrap-vue'
 Vue.component('b-navbar', BNavbar)
+import { BadgePlugin } from 'bootstrap-vue'
+Vue.use(BadgePlugin)
 
 import Vuelidate from "vuelidate";
 import "bootstrap/dist/css/bootstrap.css";

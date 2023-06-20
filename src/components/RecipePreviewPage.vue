@@ -1,6 +1,7 @@
 <template>
 
     <div>
+      <router-link :to="'/recipe/' + recipe.id">
         <b-card
       :title=recipe.title
       :img-src=recipe.image
@@ -35,6 +36,7 @@
     </table>
     
     </b-card>
+    </router-link>
     </div>
     <!-- <div>
   <b-card

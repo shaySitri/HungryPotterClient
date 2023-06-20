@@ -2,10 +2,10 @@
   <div class="container">
     <h1 class="title">Main Page</h1>
     <h1>{{ username }}</h1>
-    <recipe-preview-list :recipes="randomRecipes"></recipe-preview-list>    
+    <recipe-preview-list :recipes="randomRecipes" :favorites="this.userFavorites"></recipe-preview-list>    
     
     <div v-if="lastWatched">
-      <recipe-preview-list :recipes="lastWatched"></recipe-preview-list>
+      <recipe-preview-list :recipes="lastWatched" :favorites="this.userFavorites"></recipe-preview-list>
     </div>
     <div v-else>
       <router-link v-if="!$root.store.username" to="/login" tag="button">You need to Login to vue this</router-link>
@@ -33,6 +33,7 @@ export default {
     username: "",
     randomRecipes: "",
     lastWatched: "",
+    userFavorites: [],
     showAddRecipe: false,
     };
   },
@@ -44,6 +45,7 @@ mounted()
     this.getLastWatched();
   }
   this.random()
+  this.isFavorite()
 
 },
 methods:
@@ -66,6 +68,16 @@ methods:
         this.$root.store.server_domain + "/users/lastViews");
         let arrayWatched = response.data;
         this.lastWatched = arrayWatched;
+    } catch (error) {
+
+        console.log(error);
+    }
+    }, 
+    async isFavorite() {
+    try {
+        const response = await this.axios.get(
+        this.$root.store.server_domain + "/users/favorites");
+        this.userFavorites = response.data;
     } catch (error) {
 
         console.log(error);
