@@ -24,7 +24,8 @@ import { BNavbar } from 'bootstrap-vue'
 Vue.component('b-navbar', BNavbar)
 import { BadgePlugin } from 'bootstrap-vue'
 Vue.use(BadgePlugin)
-
+import { VBHover } from 'bootstrap-vue'
+Vue.directive('b-hover', VBHover)
 import Vuelidate from "vuelidate";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";

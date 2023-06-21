@@ -2,7 +2,7 @@
   <div>
     <ul>
       <li v-for="r in recipes" :key="r.id">
-        <recipe-preview :recipe="r" :favorite="isFavorite(r.id)"></recipe-preview>
+        <recipe-preview :recipe="r"></recipe-preview>
       </li>
     </ul>
   </div>
@@ -17,18 +17,9 @@ export default {
   },
   methods:
   {
-    isFavorite(recipeid) { 
-      if (this.favorites.length != 0)
-      {
-        return this.favorites.includes(recipeid)
-      }
-      else
-      {
-        return false
-      }
-    }
+
   },
-  props: ['recipes','favorites'],
+  props: ['recipes','favorites', 'watched'],
 };
 </script>
 
@@ -36,4 +27,5 @@ export default {
 .container {
   min-height: 400px;
 }
+
 </style>
