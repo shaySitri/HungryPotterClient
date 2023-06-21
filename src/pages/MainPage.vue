@@ -2,15 +2,27 @@
   <div class="container">
     <h1 class="title">Main Page</h1>
     <h1>{{ username }}</h1>
-    <recipe-preview-list :recipes="randomRecipes" :favorites="this.userFavorites"></recipe-preview-list>    
+    <table align="right">
+      <td>
+        <recipe-preview-list :recipes="randomRecipes" ></recipe-preview-list>    
+      </td>
+    </table>
+    <table>
+      <table align="left">
+      <td>
+        <div v-if="username">
+      <recipe-preview-list :recipes="lastWatched" ></recipe-preview-list>
+        </div>
+        <div v-else>
+          <router-link v-if="!$root.store.username" to="/login" tag="button">You need to Login to vue this</router-link>
+        </div>
+      </td>
+    </table>
+    <table align="center">
+      <b-button id="goTo" variant="outline-secondary">Generate New Recipes</b-button>
+    </table>
+    </table>
     
-    <div v-if="lastWatched">
-      <recipe-preview-list :recipes="lastWatched" :favorites="this.userFavorites"></recipe-preview-list>
-    </div>
-    <div v-else>
-      <router-link v-if="!$root.store.username" to="/login" tag="button">You need to Login to vue this</router-link>
-      {{ !$root.store.username }}
-  </div>
 
   <button @click="show"> Add Recipe </button>
   <new-recipe-modal v-show="showAddRecipe"></new-recipe-modal>
@@ -33,7 +45,6 @@ export default {
     username: "",
     randomRecipes: "",
     lastWatched: "",
-    userFavorites: [],
     showAddRecipe: false,
     };
   },
@@ -66,23 +77,23 @@ methods:
     try {
         const response = await this.axios.get(
         this.$root.store.server_domain + "/users/lastViews");
-        let arrayWatched = response.data;
-        this.lastWatched = arrayWatched;
+        // this.allWtached = response.data;
+        this.lastWatched = response.data.reverse().splice(-3);
     } catch (error) {
 
         console.log(error);
     }
     }, 
-    async isFavorite() {
-    try {
-        const response = await this.axios.get(
-        this.$root.store.server_domain + "/users/favorites");
-        this.userFavorites = response.data;
-    } catch (error) {
+    // async isFavorite() {
+    // try {
+    //     const response = await this.axios.get(
+    //     this.$root.store.server_domain + "/users/favorites");
+    //     this.userFavorites = response.data;
+    // } catch (error) {
 
-        console.log(error);
-    }
-    }, 
+    //     console.log(error);
+    // }
+    // }, 
     show: function()
     {
       this.showAddRecipe = !this.showAddRecipe
