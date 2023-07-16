@@ -73,22 +73,13 @@ methods:
         const response = await this.axios.get(
         this.$root.store.server_domain + "/users/lastViews");
         // this.allWtached = response.data;
-        this.lastWatched = response.data.reverse().splice(-3);
+        this.lastWatched = response.data.reverse().splice(-3).reverse();
     } catch (error) {
 
         console.log(error);
     }
     }, 
-    // async isFavorite() {
-    // try {
-    //     const response = await this.axios.get(
-    //     this.$root.store.server_domain + "/users/favorites");
-    //     this.userFavorites = response.data;
-    // } catch (error) {
 
-    //     console.log(error);
-    // }
-    // }, 
     show: function()
     {
         this.showAddRecipe = !this.showAddRecipe 
