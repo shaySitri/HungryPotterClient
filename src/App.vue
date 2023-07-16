@@ -14,9 +14,9 @@
         <b-nav-item><router-link :to="{ name: 'about' }">About</router-link></b-nav-item>
 
         <b-nav-item-dropdown text="Personal Zone" right v-show="$root.store.shared_data.username">
-          <b-dropdown-item><router-link :to="{ name: 'about' }">My Food Spells</router-link></b-dropdown-item>
-          <b-dropdown-item><router-link :to="{ name: 'about' }">Family Food Spells</router-link></b-dropdown-item>
-          <b-dropdown-item><router-link :to="{ name: 'about' }">Favorite Spells</router-link></b-dropdown-item>
+          <b-dropdown-item><router-link :to="{ name: 'myRecipes' }">My Food Spells</router-link></b-dropdown-item>
+          <b-dropdown-item><router-link :to="{ name: 'family' }">Family Food Spells</router-link></b-dropdown-item>
+          <b-dropdown-item><router-link :to="{ name: 'favorite' }">Favorite Spells</router-link></b-dropdown-item>
         </b-nav-item-dropdown>
 
       </b-navbar-nav>

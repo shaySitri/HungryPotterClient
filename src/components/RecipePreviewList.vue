@@ -11,7 +11,7 @@
 <script>
 import RecipePreview from "./RecipePreviewPage.vue";
 export default {
-  name: "RecipeRandom",
+  name: "RecipePreviewList",
   components: {
     RecipePreview
   },
