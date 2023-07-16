@@ -1,5 +1,5 @@
 <template>
-  <div id="app" @logged="location.reload()">
+  <div id="app">
     
     <div>
       <b-navbar toggleable="lg" type="dark" variant="info" >

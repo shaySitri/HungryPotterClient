@@ -12,22 +12,20 @@
 
 
         <table align="left">
-        <div class="favoriteDisplay">
-
+        <div class="favoriteDisplay" v-show="user">
             <b-icon-heart font-scale="1.6" opacity="0.7" v-show="!recipe.favorite" @click="addToFavorite()" ></b-icon-heart>
             <b-icon-heart-fill font-scale="1.6" opacity="0.7" variant="danger" v-show="recipe.favorite" ></b-icon-heart-fill>
         </div>
       </table>
       <table align="right">
-        <div class="watchedDisplay">
+        <div class="watchedDisplay" v-show="user">
           
           <b-icon-eye font-scale="1.6" opacity="0.7" v-show="recipe.watched"  ></b-icon-eye>
           <b-icon-eye-slash font-scale="1.6" opacity="0.7" v-show="!recipe.watched"  ></b-icon-eye-slash>
         </div>
       </table>
   <br>
-  <br>
-  <b>{{  recipe.title }}</b>
+  <b>{{  recipe.title }} </b>
 
   <br>
   <br>
@@ -52,9 +50,14 @@
     <table align="center">
       <br>
       <tr >
-      <td><b-icon-alarm font-scale="2" ></b-icon-alarm>  </td>
+      <td><b-icon-alarm font-scale="1.5" ></b-icon-alarm>  </td>
       <td> {{ recipe.readyInMinutes }} Minutes </td>
     </tr>
+    <tr>
+      <td><b-icon-hand-thumbs-up font-scale="1.5" ></b-icon-hand-thumbs-up>  </td>
+      <td> {{ recipe.popularity }} Likes </td>
+    </tr>
+
 
     </table>
       <br>
@@ -92,6 +95,11 @@ export default {
         {
           type: Boolean,
           required: true
+        },
+        user:
+        {
+          type: String,
+          required: true
         }
 
     },
@@ -99,23 +107,23 @@ export default {
     {
         async addToFavorite()
         {
-          try {
 
+              try {
               const response = await this.axios.post(
               this.$root.store.server_domain + "/users/favorites/",
               {
                 recipeid: this.recipe.id
               });
-              
+
               let arrayRecipes = response.data.randRecipes;
               this.randomRecipes = arrayRecipes;
               this.recipe.favorite = true;
-          } catch (error) {
+              } catch (error) {
 
               console.log(error);
+              }
           }
 
-        }
 
     }
 };

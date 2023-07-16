@@ -53,7 +53,7 @@ export default {
             this.$root.store.shared_data.login(this.username, firstname);
             this.$emit('logged')
             this.$root.toast("Login", "User logged in successfully", "success");
-            ///location.reload();
+            location.reload();
 
         } catch (err) {
             console.log(err.response);

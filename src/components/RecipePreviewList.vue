@@ -1,10 +1,10 @@
 <template>
   <div>
-    <ul>
-      <li v-for="r in recipes" :key="r.id">
-        <recipe-preview :recipe="r"></recipe-preview>
-      </li>
-    </ul>
+    <table>
+      <tr v-for="r in recipes" :key="r.id">
+        <recipe-preview :recipe="r" :user="user"></recipe-preview>
+      </tr>
+    </table>
   </div>
 </template>
 
@@ -19,7 +19,7 @@ export default {
   {
 
   },
-  props: ['recipes','favorites', 'watched'],
+  props: ['recipes','favorites', 'watched','user'],
 };
 </script>
 

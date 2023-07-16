@@ -1,31 +1,26 @@
 <template>
   <div class="container">
     <h1 class="title">Main Page</h1>
-    <h1>{{ username }}</h1>
-    <table align="right">
-      <td>
-        <recipe-preview-list :recipes="randomRecipes" ></recipe-preview-list>    
-      </td>
+    <h1>LOOOOK AT MEEEE{{ username }}</h1>
+
+    <table align="left" id="randomCol">
+      <h> <b> Explore the spells... </b></h>
+        <recipe-preview-list :recipes="randomRecipes" :user="username" ></recipe-preview-list>  
+        <b-icon-arrow-repeat font-scale="5" animation="cylon" @click="random()"></b-icon-arrow-repeat>
+  
     </table>
-    <table>
-      <table align="left">
-      <td>
+    <table align="right">
         <div v-if="username">
-      <recipe-preview-list :recipes="lastWatched" ></recipe-preview-list>
+      <recipe-preview-list :user="username" :recipes="lastWatched" ></recipe-preview-list>
         </div>
         <div v-else>
           <router-link v-if="!$root.store.username" to="/login" tag="button">You need to Login to vue this</router-link>
         </div>
-      </td>
-    </table>
-    <table align="center">
-      <b-button id="goTo" variant="outline-secondary">Generate New Recipes</b-button>
-    </table>
     </table>
     
 
   <button @click="show"> Add Recipe </button>
-  <new-recipe-modal v-show="showAddRecipe"></new-recipe-modal>
+    <new-recipe-modal v-show="showAddRecipe"></new-recipe-modal>
   
 
 </div>
@@ -96,8 +91,7 @@ methods:
     // }, 
     show: function()
     {
-      this.showAddRecipe = !this.showAddRecipe
-      
+        this.showAddRecipe = !this.showAddRecipe 
     }
 
 }
@@ -116,4 +110,5 @@ methods:
   pointer-events: none;
   cursor: default;
 }
+
 </style>
