@@ -1,75 +1,92 @@
 <template>
-  <div>
-    <h>Search Page</h>
+  <div class="searchDiv">
 
-    <input v-model="query" type="input" />
-    <div>{{ query }}</div>
-    <div>Selected: {{ numOfRes }}</div>
+    <h1  class="title">Search Page</h1>
+    <br>
 
+    <div>
+     
+    <input v-model="query" type="input" placeholder="Find a spell..."/> <br>
+
+    <br>
+      <div align="center">
+        <div class="accordion" role="tablist" >
+          <b-card no-body class="mb-1">
+            <b-card-header header-tag="header" class="p-1" role="tab">
+              <b-button block v-b-toggle.accordion-1 variant="outline-dark">Cuisines</b-button>
+            </b-card-header>
+            <b-collapse id="accordion-1" visible accordion="my-accordion" role="tabpanel">
+              <b-card-body>
+                <b-form-checkbox-group
+                        v-model="cuisine"
+                        :options="filters.cuisine"
+                        :aria-describedby="ariaDescribedby"
+                        name="cuisine-choose"
+                      ></b-form-checkbox-group>
+              </b-card-body>
+            </b-collapse>
+          </b-card>
+
+          <b-card no-body class="mb-1">
+            <b-card-header header-tag="header" class="p-1" role="tab">
+              <b-button block v-b-toggle.accordion-2 variant="outline-dark">Diet</b-button>
+            </b-card-header>
+            <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel">
+              <b-card-body>
+                <b-form-checkbox-group
+                        v-model="diet"
+                        :options="filters.diet"
+                        :aria-describedby="ariaDescribedby"
+                        name="cuisine-choose"
+                      ></b-form-checkbox-group>
+
+              </b-card-body>
+            </b-collapse>
+          </b-card>
+
+          <b-card no-body class="mb-1">
+            <b-card-header header-tag="header" class="p-1" role="tab">
+              <b-button block v-b-toggle.accordion-3 variant="outline-dark">Intolerances</b-button>
+            </b-card-header>
+            <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
+              <b-card-body>
+                <b-form-checkbox-group
+                        v-model="intolerance"
+                        :options="filters.intolerance"
+                        :aria-describedby="ariaDescribedby"
+                        name="cuisine-choose"
+                      ></b-form-checkbox-group>
+              </b-card-body>
+            </b-collapse>
+          </b-card>
+        </div>
+
+      </div>
+
+    <br>
+
+    
+  <div id="sort">
+    Sort by:
+    <select v-model="sort">
+      <option>Popularity</option>
+      <option>Time</option>
+    </select>
+  </div>
+
+  <div id="results">
+    Results:
     <select v-model="numOfRes">
       <option>5</option>
       <option>10</option>
       <option>15</option>
     </select>
-    
-    <b-button v-b-toggle.collapse-1 variant="primary">Choose Cusine</b-button>
-    <b-collapse id="collapse-1" class="mt-2">
-      <b-card>
-        <b-form-group
-      label="Chose the cuisines you want to filter with"
-      v-slot="{ ariaDescribedby }"
-        >
-          <b-form-checkbox-group
-            v-model="cuisine"
-            :options="filters.cuisine"
-            :aria-describedby="ariaDescribedby"
-            name="cuisine-choose"
-          ></b-form-checkbox-group>
-        </b-form-group>
-    </b-card>
-  </b-collapse>
+  </div>
 
 
-  <b-button v-b-toggle.collapse-2 variant="primary">Choose Diet</b-button>
-    <b-collapse id="collapse-2" class="mt-2">
-      <b-card>
-        <b-form-group
-      label="Chose the diet you want to filter with"
-      v-slot="{ ariaDescribedby }"
-        >
-          <b-form-checkbox-group
-            v-model="diet"
-            :options="filters.diet"
-            :aria-describedby="ariaDescribedby"
-            name="cuisine-choose"
-          ></b-form-checkbox-group>
-        </b-form-group>
-    </b-card>
-  </b-collapse>
+  
 
-  <b-button v-b-toggle.collapse-3 variant="primary">Choose Intolerances</b-button>
-    <b-collapse id="collapse-3" class="mt-2">
-      <b-card>
-        <b-form-group
-      label="Chose the diet you want to filter with"
-      v-slot="{ ariaDescribedby }"
-        >
-          <b-form-checkbox-group
-            v-model="intolerance"
-            :options="filters.intolerance"
-            :aria-describedby="ariaDescribedby"
-            name="cuisine-choose"
-          ></b-form-checkbox-group>
-        </b-form-group>
-    </b-card>
-  </b-collapse>
-
-
-  <select v-model="sort">
-      <option>Popularity</option>
-      <option>Time</option>
-    </select>
-
+    <br>
     <button @click="search" :disabled="!query"> Search </button>
 
     <div>
@@ -79,6 +96,7 @@
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -98,7 +116,8 @@ export default {
       sort: "",
       filters: "",
       results: [],
-      noRes: false
+      noRes: false,
+      
       }
     },
     mounted()
@@ -106,6 +125,7 @@ export default {
       this.setFilters()
     },
     methods: {
+
       setFilters: async function()
       {
         try {
@@ -123,6 +143,7 @@ export default {
       },
       search: async function()
       {
+
         this.noRes = false;
         let request =
         {
@@ -134,8 +155,10 @@ export default {
               sort: this.sort
         }
         console.log(request)
-          try {
-          const response =  await this.axios.get(this.$root.store.server_domain + "/search",{
+
+        
+        try {
+        const response =  await this.axios.get(this.$root.store.server_domain + "/search",{
           params:
           {
               query: this.query,
@@ -145,11 +168,11 @@ export default {
               number: this.numOfRes,
               sort: this.sort
           }}
-          );
-
-          this.results = response.data;
+        );
           
-          if (this.results.length == 0)
+        this.results = response.data;
+
+     if (this.results.length == 0)
           {
             this.noRes = true
           }
@@ -165,5 +188,15 @@ export default {
 </script>
 
 <style>
+.searchDiv
+{
+  text-align: center;
+}
+
+.accordion 
+{
+  width: 60%;
+}
+
 
 </style>
