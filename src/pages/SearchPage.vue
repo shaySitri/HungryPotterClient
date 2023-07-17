@@ -106,9 +106,12 @@ export default {
     {
       this.setFilters()
       this.user = this.$root.store.shared_data.username;
-      this.lastSearchQuery = JSON.parse(this.$root.store.shared_data.lastsearch);
-      this.queryData = JSON.parse(this.queryInfo)
-    
+      if(this.$root.store.shared_data.lastsearch != "")
+      {
+        this.lastSearchQuery = JSON.parse(this.$root.store.shared_data.lastsearch);
+        this.queryData = JSON.parse(this.queryInfo)
+      }
+      
     },
 
     methods: {
@@ -161,11 +164,12 @@ export default {
           params:
           queryParams
         }
+        
         );
 
+        this.$root.store.shared_data.search(JSON.stringify(queryParams));
 
         
-        this.$root.store.shared_data.search(JSON.stringify(queryParams));
         
         this.query = ""
         this.results = response.data;
