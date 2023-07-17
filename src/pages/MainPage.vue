@@ -73,6 +73,7 @@ methods:
         const response = await this.axios.get(
         this.$root.store.server_domain + "/users/lastViews");
         // this.allWtached = response.data;
+        console.log(response)
         this.lastWatched = response.data.reverse().splice(-3).reverse();
     } catch (error) {
 

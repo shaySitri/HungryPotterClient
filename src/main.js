@@ -18,7 +18,12 @@ import { BFormCheckboxGroup } from 'bootstrap-vue'
 Vue.component('b-form-checkbox-group', BFormCheckboxGroup)
 import { BootstrapVueIcons } from 'bootstrap-vue'
 import 'bootstrap-vue/dist/bootstrap-vue-icons.min.css'
-
+import { BToast } from 'bootstrap-vue'
+Vue.component('b-toast', BToast)
+import { BInputGroup } from 'bootstrap-vue'
+Vue.component('b-input-group', BInputGroup)
+import { BInputGroupPrepend } from 'bootstrap-vue'
+Vue.component('b-input-group-prepend', BInputGroupPrepend)
 Vue.use(BootstrapVueIcons)
 import { BNavbar } from 'bootstrap-vue'
 Vue.component('b-navbar', BNavbar)
@@ -26,6 +31,9 @@ import { BadgePlugin } from 'bootstrap-vue'
 Vue.use(BadgePlugin)
 import { VBHover } from 'bootstrap-vue'
 Vue.directive('b-hover', VBHover)
+import { BFormRadioGroup } from 'bootstrap-vue'
+Vue.component('b-form-radio-group', BFormRadioGroup)
+
 import Vuelidate from "vuelidate";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
@@ -90,21 +98,30 @@ Vue.config.productionTip = false;
 const shared_data = {
   username: localStorage.username,
   firstname: localStorage.firstname,
+  lastsearch: localStorage.lastsearch,
   login(username, firstname) {
     localStorage.setItem("username", username);
     this.username = username;
     localStorage.setItem("firstname", firstname.data);
     this.firstname = firstname.data
-
     console.log("login", this.username, this.firstname);
   },
   logout() {
     console.log("logout");
     localStorage.removeItem("username");
     localStorage.removeItem("firstname");
+    localStorage.removeItem("lastsearch");
+
     this.username = undefined;
     this.firstname = undefined;
+    this.lastsearch = undefined;
   },
+  search(lastsearch)
+  {
+    console.log("search")
+    localStorage.setItem("lastsearch", lastsearch);
+    this.lastsearch = lastsearch;
+  }
 };
 
 console.log(shared_data);

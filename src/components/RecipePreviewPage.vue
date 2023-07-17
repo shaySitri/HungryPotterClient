@@ -21,7 +21,7 @@
         <div class="watchedDisplay" v-show="user">
           
           <b-icon-eye font-scale="1.6" opacity="0.7" v-show="recipe.watched"  ></b-icon-eye>
-          <b-icon-eye-slash font-scale="1.6" opacity="0.7" v-show="!recipe.watched"  ></b-icon-eye-slash>
+          <b-icon-eye-slash font-scale="1.6" opacity="0.7" v-show="!recipe.watched"></b-icon-eye-slash>
         </div>
       </table>
   <br>

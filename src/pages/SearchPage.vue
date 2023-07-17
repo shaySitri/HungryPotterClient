@@ -5,107 +5,77 @@
     <br>
 
     <div>
-     
-    <input v-model="query" id="queryInput" type="input" placeholder="Find a spell..."/> <br>
-
     <br>
       <div align="center">
-        <div class="accordion" role="tablist" >
-          <b-card no-body class="mb-1">
-            <b-card-header header-tag="header" class="p-1" role="tab">
-              <b-button block v-b-toggle.accordion-1 variant="outline-dark">Cuisines</b-button>
-            </b-card-header>
-            <b-collapse id="accordion-1" accordion="my-accordion" role="tabpanel">
-              <b-card-body>
-                <b-form-checkbox-group
-                        v-model="cuisine"
-                        :options="filters.cuisine"
-                        :aria-describedby="ariaDescribedby"
-                        name="cuisine-choose"
-                      ></b-form-checkbox-group>
-              </b-card-body>
-            </b-collapse>
-          </b-card>
-
-          <b-card no-body class="mb-1">
-            <b-card-header header-tag="header" class="p-1" role="tab">
-              <b-button block v-b-toggle.accordion-2 variant="outline-dark">Diet</b-button>
-            </b-card-header>
-            <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel">
-              <b-card-body>
-                <b-form-checkbox-group
-                        v-model="diet"
-                        :options="filters.diet"
-                        :aria-describedby="ariaDescribedby"
-                        name="cuisine-choose"
-                      ></b-form-checkbox-group>
-
-              </b-card-body>
-            </b-collapse>
-          </b-card>
-
-          <b-card no-body class="mb-1">
-            <b-card-header header-tag="header" class="p-1" role="tab">
-              <b-button block v-b-toggle.accordion-3 variant="outline-dark">Intolerances</b-button>
-            </b-card-header>
-            <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
-              <b-card-body>
-                <b-form-checkbox-group
-                        v-model="intolerance"
-                        :options="filters.intolerance"
-                        :aria-describedby="ariaDescribedby"
-                        name="cuisine-choose"
-                      ></b-form-checkbox-group>
-              </b-card-body>
-            </b-collapse>
-          </b-card>
+        <b-list-group>
+          <div id="search">
+            <b-list-group-item>
+              <b-input-group>
+                <b-input-group-prepend is-text>
+                  <b-icon icon="search"></b-icon>
+                </b-input-group-prepend>
+                <b-form-input type="search" placeholder="Find a spell..." v-model="query" id="queryInput"></b-form-input>
+                <b-button variant="outline-primary" @click="lastSearch">Last Search</b-button>
+              </b-input-group>
+            </b-list-group-item>
         </div>
+
+          <b-list-group-item>
+            <last-search name="Cuisines" id="cuisines" type="checkbox" :options="filters.cuisine" @update="(res) => cuisines = res"></last-search>
+          </b-list-group-item>
+
+          <b-list-group-item>
+            <last-search name="Diet" id="diet" type="checkbox" :options="filters.diet" @update="(res) => diet = res"></last-search>
+          </b-list-group-item>
+
+
+          <b-list-group-item>
+            <last-search name="Intolerances" id="intolerances" type="checkbox" :options="filters.intolerance" @update="(res) => intolerance = res"></last-search>
+          </b-list-group-item>
+
+          <b-list-group-item>
+            <last-search name="Sort By" id="sort" type="radio" :options="sortOptions" @update="(res) => sort = res"></last-search>
+          </b-list-group-item>
+
+          <b-list-group-item>
+            <last-search name="Result" id="result" type="radio" :options="resOptions" @update="(res) => numOfRes = res"></last-search>
+          </b-list-group-item>
+        </b-list-group>
 
       </div>
 
     <br>
 
     
-  <div id="sort">
-    Sort by:
-    <select v-model="sort">
-      <option>Popularity</option>
-      <option>Time</option>
-    </select>
-  </div>
-
-  <div id="results">
-    Results:
-    <select v-model="numOfRes">
-      <option>5</option>
-      <option>10</option>
-      <option>15</option>
-    </select>
-  </div>
 
 
-  
+
+
+
 
     <br>
     <b-button pill variant="outline-success" @click="search" :disabled="!query">Search</b-button>
     <br>
     <div align="center">
       <br>
-      <recipe-preview-list :recipes="results"></recipe-preview-list>
+      <recipe-preview-list :recipes="results" :user="user"></recipe-preview-list>
       <div v-if="noRes">
         No Results Found.
       </div>
     </div>
   </div>
-</div>
+
+  </div>
 </template>
 
 <script>
+import LastSearch from '../components/LastSearch.vue';
 import RecipePreviewList from '../components/RecipePreviewList.vue';
 export default {
   name: "Search",
   components: {
-    RecipePreviewList
+    RecipePreviewList,
+    LastSearch
   },
   data() {
     return {
@@ -118,15 +88,43 @@ export default {
       filters: "",
       results: [],
       noRes: false,
+      user: "",
+      lastSearchQuery : "",
+      sortOptions: [
+          { text: 'Time', value: 'time' },
+          { text: 'Popularity', value: 'popularity' },
+      ],
+      resOptions: [
+          { text: '5', value: '5' },
+          { text: '10', value: '10' },
+          { text: '15', value: '15' }
+      ]
       
       }
     },
     mounted()
     {
       this.setFilters()
+      this.user = this.$root.store.shared_data.username;
+      this.lastSearchQuery = JSON.parse(this.$root.store.shared_data.lastsearch);
+      this.queryData = JSON.parse(this.queryInfo)
+    
     },
-    methods: {
 
+    methods: {
+      setRes(newRes) {
+        console.log(newRes)
+        this.numOfRes = newRes
+      },
+      lastSearch()
+      {
+        console.log("DNE")
+        this.query = this.lastSearchQuery.query
+        this.cuisine = this.lastSearchQuery.cuisine
+        this.nunOfRes = this.lastSearchQuery.numOfRes
+        this.diet = this.lastSearchQuery.diet
+        this.intolerance = this.lastSearchQuery.intolerances
+      },
       setFilters: async function()
       {
         try {
@@ -146,30 +144,28 @@ export default {
       {
 
         this.noRes = false;
-        let request =
+        
+        let queryParams = 
         {
           query: this.query,
-              cuisine: this.cuisine.toString(),
-              diet: this.diet.toString(),
-              intolerances: this.intolerance.toString(),
-              number: this.numOfRes,
-              sort: this.sort
+          cuisine: this.cuisine.toString(),
+          diet: this.diet.toString(),
+          intolerances: this.intolerance.toString(),
+          number: this.numOfRes,
+          sort: this.sort.toLowerCase()
         }
-        console.log(request)
 
-        
+
         try {
         const response =  await this.axios.get(this.$root.store.server_domain + "/search",{
           params:
-          {
-              query: this.query,
-              cuisine: this.cuisine.toString(),
-              diet: this.diet.toString(),
-              intolerances: this.intolerance.toString(),
-              number: this.numOfRes,
-              sort: this.sort
-          }}
+          queryParams
+        }
         );
+
+
+        
+        this.$root.store.shared_data.search(JSON.stringify(queryParams));
         
         this.query = ""
         this.results = response.data;
@@ -185,7 +181,15 @@ export default {
       }
       
     },
-  } 
+  //   makeToast(append = false) {
+  //       this.toastCount++
+  //       this.$bvToast.toast(`This is toast number ${this.toastCount}`, {
+  //         title: 'BootstrapVue Toast',
+  //         autoHideDelay: 5000,
+  //         appendToast: append
+  //       })
+  // },
+} 
 
 </script>
 
@@ -194,7 +198,11 @@ export default {
 {
   text-align: center;
 }
-
+#search
+{
+  width: 30%;
+  align-content: center;
+}
 .accordion 
 {
   width: 30%;
