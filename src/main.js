@@ -104,6 +104,7 @@ const shared_data = {
     this.username = username;
     localStorage.setItem("firstname", firstname.data);
     this.firstname = firstname.data
+    localStorage.setItem("lastsearch", "");
     console.log("login", this.username, this.firstname);
   },
   logout() {
