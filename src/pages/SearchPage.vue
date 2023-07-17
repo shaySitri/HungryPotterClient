@@ -6,7 +6,7 @@
 
     <div>
      
-    <input v-model="query" type="input" placeholder="Find a spell..."/> <br>
+    <input v-model="query" id="queryInput" type="input" placeholder="Find a spell..."/> <br>
 
     <br>
       <div align="center">
@@ -15,7 +15,7 @@
             <b-card-header header-tag="header" class="p-1" role="tab">
               <b-button block v-b-toggle.accordion-1 variant="outline-dark">Cuisines</b-button>
             </b-card-header>
-            <b-collapse id="accordion-1" visible accordion="my-accordion" role="tabpanel">
+            <b-collapse id="accordion-1" accordion="my-accordion" role="tabpanel">
               <b-card-body>
                 <b-form-checkbox-group
                         v-model="cuisine"
@@ -87,9 +87,10 @@
   
 
     <br>
-    <button @click="search" :disabled="!query"> Search </button>
-
-    <div>
+    <b-button pill variant="outline-success" @click="search" :disabled="!query">Search</b-button>
+    <br>
+    <div align="center">
+      <br>
       <recipe-preview-list :recipes="results"></recipe-preview-list>
       <div v-if="noRes">
         No Results Found.
@@ -169,7 +170,8 @@ export default {
               sort: this.sort
           }}
         );
-          
+        
+        this.query = ""
         this.results = response.data;
 
      if (this.results.length == 0)
@@ -195,8 +197,12 @@ export default {
 
 .accordion 
 {
-  width: 60%;
+  width: 30%;
 }
 
+#queryInput
+{
+  text-align: center;
+}
 
 </style>
