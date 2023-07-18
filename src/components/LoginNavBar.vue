@@ -1,6 +1,9 @@
 <template>
     <div>
-        <b-form @submit.prevent="Login">
+        
+        <b-form inline @submit.prevent="Login">
+            
+
             <b-form-input
                 id="Username"
                 size="sm" class="mr-sm-2" placeholder="Username"
@@ -19,9 +22,13 @@
             <b-button
             type="submit"
             variant="primary"
-            size="sm" class="my-2 my-sm-0" 
+            size="sm" class="my-2 my-sm-0" id="sub-but"
             >Login</b-button>
+
+
         </b-form>
+
+
 
     </div>
 </template>
@@ -66,5 +73,17 @@ export default {
 </script>
 
 <style>
+#sub-but
+{
+    background-color: #37713f;
+    border-color: #37713f;
+}
+
+#sub-but:hover
+{
+    background-color: #304e7a;
+    border-color: #304e7a;
+}
+
 
 </style>
