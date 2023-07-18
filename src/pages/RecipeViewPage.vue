@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>{{ preview.title }}</h1>
+        <h1 class="title">{{ preview.title }}</h1>
         <img :src="preview.image" class="center" />
         <h1>{{ servings }}</h1>
         <div class="preview">

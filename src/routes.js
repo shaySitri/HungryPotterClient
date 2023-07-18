@@ -49,11 +49,11 @@ const routes = [
     component: () => import("./pages/MyPage.vue"),
   },
 
-  // {
-  //   path: "/about",
-  //   name: "about",
-  //   component: () => import("./pages/About"),
-  // },
+  {
+    path: "/newSpell",
+    name: "newSpell",
+    component: () => import("./components/NewRecipeModal.vue"),
+  },
 
   {
     path: "*",

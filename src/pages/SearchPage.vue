@@ -1,9 +1,7 @@
 <template>
   <div class="searchDiv">
 
-    <h1  class="title">Search Page</h1>
-    <br>
-
+    <h1 class="title">Search Page</h1>
     <div>
     <br>
       <div align="center">
@@ -18,7 +16,7 @@
                 <b-button variant="outline-primary" @click="lastSearch">Last Search</b-button>
               </b-input-group>
             </b-list-group-item>
-        </div>
+          </div>
 
           <b-list-group-item>
             <search-filter name="Cuisines" id="cuisines" type="checkbox" :options="filters.cuisine" :lastRes="cuisine"  @update="(res) => {cuisine = res; console.log(res)}"></search-filter>
@@ -47,16 +45,14 @@
         </b-list-group>
 
       </div>
-
-    <div align="center">
-      <br>
-      <recipe-preview-list :recipes="results" :user="user"></recipe-preview-list>
-      <div v-if="noRes">
-        No Results Found.
-      </div>
+      <div align="center" class="recipeList">
+        <br>
+        <recipe-preview-list :recipes="results" :user="user"></recipe-preview-list>
+        <div v-if="noRes">
+            No Results Found.
+        </div>
     </div>
   </div>
-
   </div>
 </template>
 
@@ -188,6 +184,11 @@ export default {
         this.cuisine = []
         this.intolerance = []
         this.results = response.data;
+        for (let i = 0; i < this.results.length; i++)
+        {
+          this.results[i].image = `https://spoonacular.com/recipeImages/${this.results[i].id}-556x370.jpg`
+          console.log(this.results[i].image)
+        }
         
         
 
@@ -208,10 +209,7 @@ export default {
 </script>
 
 <style>
-.searchDiv
-{
-  text-align: center;
-}
+
 #search
 {
   width: 30%;

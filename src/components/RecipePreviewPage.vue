@@ -148,9 +148,6 @@ export default {
   margin: auto;
   border: 3px solid #000000;
   border-radius: 3%;
-  
-
-  
 
 }
 
