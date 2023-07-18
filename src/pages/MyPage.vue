@@ -4,7 +4,7 @@
     <h1>{{ username }}'s food spells!</h1>
 
     <table align="center" id="myCol">  
-      <h> <b> famm... </b></h>
+      <h> <b> my... </b></h>
         <recipe-preview-list :recipes="userRecipes" :user="username" ></recipe-preview-list>    
     </table>
 </div>
@@ -36,10 +36,11 @@ methods:
     try {
         const response = await this.axios.get(
         this.$root.store.server_domain + "/users/myRecipes");
-        let resUser = response.data;
-        for (let i=0; i<resUser.length; i++){
-          this.userRecipes.push(resUser[i].preview);
-        }
+        this.userRecipes = response.data;
+        // console.log(resUser)
+        // for (let i=0; i<resUser.length; i++){
+        //   this.userRecipes.push(resUser[i].preview);
+        // }
     } catch (error) {
 
         console.log(error);

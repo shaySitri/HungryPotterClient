@@ -3,7 +3,7 @@
     
     <div>
       <b-navbar toggleable="lg" type="dark" variant="info" >
-      <b-navbar-brand href="#">Hungrry Potter</b-navbar-brand>
+      <b-navbar-brand href="#">Hungry Potter</b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 

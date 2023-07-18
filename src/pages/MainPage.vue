@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1 class="title">Main Page</h1>
-    <h1>LOOOOK AT MEEEE{{ username }}</h1>
+    <h1>LOOOOK AT MEEEE {{ username }}</h1>
 
     <table align="left" id="randomCol">
       <h> <b> Explore the spells... </b></h>

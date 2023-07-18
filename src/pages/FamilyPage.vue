@@ -36,10 +36,7 @@ methods:
     try {
         const response = await this.axios.get(
         this.$root.store.server_domain + "/users/myRecipes/family");
-        let resFamily = response.data;
-        for (let i=0; i<resFamily.length; i++){
-          this.userFamilyRecipes.push(resFamily[i].preview);
-        }
+        this.userFamilyRecipes = response.data;
     } catch (error) {
 
         console.log(error);
