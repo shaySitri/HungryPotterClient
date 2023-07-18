@@ -4,7 +4,7 @@
 
         <div>
         <b-button v-b-modal.modal-1 >Add New Recipe</b-button>
-        <b-modal id="modal-1" title="Add New Recipe" hide-footer>
+        <b-modal ref="modal" id="modal-1" title="Add New Recipe" hide-footer>
             <form>
                 Type:
                 <b-form-select v-model="type" :options="typeOptions"></b-form-select> <br>
@@ -49,7 +49,7 @@
                 <br>
                 <div v-show="type=='Family'">
                     Optional Description: <br>
-                    <textarea></textarea>
+                    <textarea  v-model="optionalDescription"></textarea>
                 
                 </div>
             </form>
@@ -105,6 +105,21 @@ export default {
   },
   methods:
   {
+    resetData() {
+        this.type = "";
+        this.title = "";
+        this.readyInMintes = 30;
+        this.image = "";
+        this.vegan = false;
+        this.vegeterian = false;
+        this.ingredients = [{ name: "", unit: "", quantity: "" }];
+        this.instructions = [{ instruction: "" }];
+        this.glutenFree = false;
+        this.servings = "1";
+        this.optionalDescription = " ";
+        this.dangerAlert = false;
+        this.currentInstruction = "";
+    },
     addNewIng()
     {
         this.ingredients.push
@@ -123,11 +138,19 @@ export default {
         {
             this.ingredients.splice(index , 1);
         }
+        else{
+            this.ingredients = [
+            {
+                name: "",
+                unit: "",
+                quantity: ""
+            } ]
+        }
     },
 
     addInstrction()
     {
-        this.instructions.push(" ")
+        this.instructions.push({ instruction: "" });
     },
     delInstruction(index)
     {        
@@ -140,10 +163,20 @@ export default {
     async addRecipe()
     {
         let recipeIng = ""
-        this.ingredients.pop()
-        console.log(recipeIng)
+        let recipeIngList = []
+        for(let i=0;i< this.ingredients.length;i++){
+            if(this.ingredients[i].name != "" && this.ingredients[i].quantity != "" && this.ingredients[i].unit != ""){
+                recipeIngList.push (this.ingredients[i].name + "-" + this.ingredients[i].quantity + "-" + this.ingredients[i].unit)
+            } 
         
-        let recipeInstructions = this.instructions.join('-')
+        }
+        recipeIng = recipeIngList.join(',')
+        
+        let instructionList = []
+        for(let i=0; i< this.instructions.length;i++){
+            instructionList.push(this.instructions[i].instruction)
+        }
+        let recipeInstructions = instructionList.join('^')
         try {
             const response = await this.axios.post(
             this.$root.store.server_domain + "/users/addRecipe", 
@@ -162,10 +195,14 @@ export default {
             }
             );
 
-            console.log(response);
+        if (response.status === 200) {
+            this.$refs.modal.hide();
+            this.resetData();
+        }
         } catch (err) {
             console.log("RES", err.response);
-            this.dangerAlert = true
+            this.dangerAlert = true;
+            
         }
 
     },

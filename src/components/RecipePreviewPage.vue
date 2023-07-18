@@ -61,7 +61,18 @@
 
     </table>
       <br>
-      <router-link :to="'/recipe/' + recipe.id"> <b-button id="goTo" variant="outline-secondary">Go to spell ></b-button> </router-link>
+      <!-- <router-link :to="'/recipe/' + recipe.id"> <b-button id="goTo" variant="outline-secondary">Go to spell ></b-button> </router-link> -->
+      <div>
+    <router-link v-if="/^\d+$/.test(recipe.id)" :to="'/recipe/' + recipe.id" exact>
+      <b-button id="goTo" variant="outline-secondary">Go to spell ></b-button>
+    </router-link>
+    <router-link v-else-if="/^FA\d+$/.test(recipe.id)" :to="'/family/' + recipe.id" exact>
+      <b-button id="goTo1" variant="outline-secondary">Go to spell ></b-button>
+    </router-link>
+    <router-link v-else :to="'/myRecipes/' + recipe.id" exact>
+      <b-button id="goTo2" variant="outline-secondary">Go to spell ></b-button>
+    </router-link>
+  </div>
       
 
       </div>
