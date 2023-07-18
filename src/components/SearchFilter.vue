@@ -7,14 +7,14 @@
               </b-card-header>
               <b-collapse :id="id" accordion="my-accordion" role="tabpanel">
                 <b-card-body v-if="type=='radio'" >
-                  <b-form-radio-group @input="$emit('update',transfer)"
-                    v-model="transfer"
+                  <b-form-radio-group @input="$emit('update',transferString)"
+                    v-model="transferString"
                     :options="options"
                   ></b-form-radio-group>
                 </b-card-body>
                 <b-card-body v-else-if="type=='checkbox'">
-                    <b-form-checkbox-group @input="$emit('update',transfer)"
-                          v-model="transfer"
+                    <b-form-checkbox-group @input="$emit('update',transferArr)"
+                          v-model="transferArr"
                           :options="options"
                         ></b-form-checkbox-group>
 
@@ -28,7 +28,7 @@
   <script>
 
   export default {
-    name: "LastSearch",
+    name: "SearchFilter",
     props:
     {
         name:
@@ -50,18 +50,27 @@
         {
             type: Array,
             required: true
+        },
+        lastRes:
+        {
+          type: [String, Array],
+          required: true
         }
     },
     data() {
     return {
-      transfer: ""
+      transferString: "",
+      transferArr: []
       
       }
     },
-    mounted()
+    watch:
     {
-        this.queryData = JSON.parse(this.queryInfo)
-    }
+      lastRes(newVal)
+      {
+        this.transferArr = newVal;
+      }
+    },
   }
   </script>
 

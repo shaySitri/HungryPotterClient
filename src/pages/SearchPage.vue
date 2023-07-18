@@ -21,41 +21,33 @@
         </div>
 
           <b-list-group-item>
-            <last-search name="Cuisines" id="cuisines" type="checkbox" :options="filters.cuisine" @update="(res) => cuisines = res"></last-search>
+            <search-filter name="Cuisines" id="cuisines" type="checkbox" :options="filters.cuisine" :lastRes="cuisine"  @update="(res) => {cuisine = res; console.log(res)}"></search-filter>
           </b-list-group-item>
 
           <b-list-group-item>
-            <last-search name="Diet" id="diet" type="checkbox" :options="filters.diet" @update="(res) => diet = res"></last-search>
+            <search-filter name="Diet" id="diet" type="checkbox" :options="filters.diet" :lastRes="diet" @update="(res) => {diet = res}"></search-filter>
           </b-list-group-item>
 
 
           <b-list-group-item>
-            <last-search name="Intolerances" id="intolerances" type="checkbox" :options="filters.intolerance" @update="(res) => intolerance = res"></last-search>
+            <search-filter name="Intolerances" id="intolerances" type="checkbox" :options="filters.intolerance"  :lastRes="intolerance" @update="(res) => {intolerance = res}"></search-filter>
           </b-list-group-item>
 
           <b-list-group-item>
-            <last-search name="Sort By" id="sort" type="radio" :options="sortOptions" @update="(res) => sort = res"></last-search>
+            <search-filter name="Sort By" id="sort" type="radio" :options="sortOptions" :lastRes="sort" @update="(res) => sort = res"></search-filter>
           </b-list-group-item>
 
           <b-list-group-item>
-            <last-search name="Result" id="result" type="radio" :options="resOptions" @update="(res) => numOfRes = res"></last-search>
+            <search-filter name="Result" id="result" type="radio" :options="resOptions" :lastRes="numOfRes" @update="(res) => numOfRes = res"></search-filter>
+          </b-list-group-item>
+
+          <b-list-group-item>
+            <b-button variant="outline-success" @click="search" :disabled="!query">Search</b-button>
           </b-list-group-item>
         </b-list-group>
 
       </div>
 
-    <br>
-
-    
-
-
-
-
-
-
-    <br>
-    <b-button pill variant="outline-success" @click="search" :disabled="!query">Search</b-button>
-    <br>
     <div align="center">
       <br>
       <recipe-preview-list :recipes="results" :user="user"></recipe-preview-list>
@@ -69,23 +61,23 @@
 </template>
 
 <script>
-import LastSearch from '../components/LastSearch.vue';
+import SearchFilter from '../components/SearchFilter.vue';
 import RecipePreviewList from '../components/RecipePreviewList.vue';
 export default {
   name: "Search",
   components: {
     RecipePreviewList,
-    LastSearch
+    SearchFilter
   },
   data() {
     return {
       query: "",
       numOfRes: "",
-      cuisine: "",
-      diet: "",
-      intolerance: "",
+      cuisine: [],
+      diet: [],
+      intolerance: [],
       sort: "",
-      filters: "",
+      filters: [],
       results: [],
       noRes: false,
       user: "",
@@ -98,7 +90,9 @@ export default {
           { text: '5', value: '5' },
           { text: '10', value: '10' },
           { text: '15', value: '15' }
-      ]
+      ],
+      checkVar: [],
+      
       
       }
     },
@@ -109,24 +103,42 @@ export default {
       if(this.$root.store.shared_data.lastsearch != "")
       {
         this.lastSearchQuery = JSON.parse(this.$root.store.shared_data.lastsearch);
-        this.queryData = JSON.parse(this.queryInfo)
       }
       
     },
+    watch:
+    {
 
+    },
     methods: {
-      setRes(newRes) {
-        console.log(newRes)
-        this.numOfRes = newRes
-      },
+
       lastSearch()
       {
         console.log("DNE")
         this.query = this.lastSearchQuery.query
-        this.cuisine = this.lastSearchQuery.cuisine
-        this.nunOfRes = this.lastSearchQuery.numOfRes
-        this.diet = this.lastSearchQuery.diet
-        this.intolerance = this.lastSearchQuery.intolerances
+        if (this.lastSearchQuery.cuisine != "")
+        {
+          this.cuisine = this.lastSearchQuery.cuisine.split(',')
+        }
+        if (this.lastSearchQuery.diet != "")
+        {
+          this.diet = this.lastSearchQuery.diet.split(',')
+        }
+        if (this.lastSearchQuery.intolerances != "")
+        {
+          this.intolerance = this.lastSearchQuery.intolerances.split(',')
+        }
+        if (this.lastSearchQuery.sort != "")
+        {
+          this.sort = this.lastSearchQuery.sort
+        }
+        if (this.lastSearchQuery.number != "")
+        {
+          this.numOfRes = this.lastSearchQuery.number
+        }
+  
+        
+        
       },
       setFilters: async function()
       {
@@ -163,16 +175,21 @@ export default {
         const response =  await this.axios.get(this.$root.store.server_domain + "/search",{
           params:
           queryParams
-        }
+        });
         
-        );
+        
 
         this.$root.store.shared_data.search(JSON.stringify(queryParams));
 
-        
-        
+        this.lastSearchQuery = JSON.parse(this.$root.store.shared_data.lastsearch);
         this.query = ""
+        this.numOfRes = ""
+        this.diet = []
+        this.cuisine = []
+        this.intolerance = []
         this.results = response.data;
+        
+        
 
      if (this.results.length == 0)
           {
@@ -185,14 +202,7 @@ export default {
       }
       
     },
-  //   makeToast(append = false) {
-  //       this.toastCount++
-  //       this.$bvToast.toast(`This is toast number ${this.toastCount}`, {
-  //         title: 'BootstrapVue Toast',
-  //         autoHideDelay: 5000,
-  //         appendToast: append
-  //       })
-  // },
+
 } 
 
 </script>
