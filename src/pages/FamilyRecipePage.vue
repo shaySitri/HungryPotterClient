@@ -38,20 +38,15 @@
               </table>
             </div>
           </div>
-
           <div class="instructions">
-            <span class="labels">Instructions:</span>
-            <div class="table-container">
-              <table class=".ins-table-container">
-                <tbody>
-                  <tr v-for="(ins, index) in instructions" :key="ins.id">
-                    <td><span class="labels2">Step {{ index + 1 }}:</span></td>
-                    <td class="step-cell"> <br>{{ ins.step }}</td>
-                  </tr>
-                </tbody>
-              </table>
+              <span class="labels">Instructions:</span>
+              <div class="step-container" v-for="(ins, index) in instructions" :key="ins.id">
+                <div>
+                  <span class="labels2">Step {{ index + 1 }}:</span>
+                </div>
+                <div class="step">{{ ins.step }}</div>
+              </div>
             </div>
-          </div>
             <div class="opt">
                <br><br>{{ optional }}
             </div>

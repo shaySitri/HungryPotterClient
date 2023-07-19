@@ -264,7 +264,7 @@ export default {
                 readyInMinutes: this.readyInMintes,
                 image: this.image,
                 vegan: this.vegan == false ? 0 : 1,
-                vegetarian: this.vegetarian == false ? 0 : 1,
+                vegetarian: this.vegeterian == false ? 0 : 1,
                 glutenFree: this.glutenFree == false ? 0 : 1,
                 ingredients: recipeIng,
                 instructions: recipeInstructions,

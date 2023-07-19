@@ -56,6 +56,8 @@ body
   text-align: left;
   display: block;
   font-family: "Harry Potter";
+  /* margin-right: 30%; */
+  left: 40%;
 }
 
 .image-recipe {
@@ -70,7 +72,9 @@ body
   text-align: center;
 }
 
-
+.instructions {
+  margin-top: 2%;
+}
 
 .center-background {
   background-color: rgba(167, 211, 236, 0.25) ;
@@ -94,6 +98,13 @@ body
   font-size:22px;
 }
 
+.step-container {
+  margin-left: 12%
+}
+
+.step {
+  text-align: left;
+}
 
 
 .header:hover 
