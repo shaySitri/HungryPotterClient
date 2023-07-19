@@ -181,7 +181,7 @@ export default {
 }
 
 .dropdown-menu.dropdown-menu { 
-    background-color: rgb(167, 211, 236, 0.4) ; 
+    background-color: rgba(167, 211, 236, 0.829) ; 
 }
 
 .drop-down-link a
