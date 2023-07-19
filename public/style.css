@@ -40,6 +40,62 @@ body
   background-attachment: fixed;
 }
 
+.labels
+{
+  font-size: 28px;
+  font-weight: bold;
+  text-align: left;
+  display: block;
+  font-family: "Harry Potter";
+
+}
+
+.labels2 {
+  font-size: 25px;
+  font-weight: bold;
+  text-align: left;
+  display: block;
+  font-family: "Harry Potter";
+}
+
+.image-recipe {
+  width: 100%;
+  height: 75%;
+  margin-bottom: 20px;
+  border-radius: 2%;
+  border: 3px solid#27374e;
+}
+
+.content-container {
+  text-align: center;
+}
+
+
+
+.center-background {
+  background-color: rgba(167, 211, 236, 0.25) ;
+  display: inline-block;
+  padding-left: 2%;
+  padding-right: 2%;
+  width: 34%;
+}
+
+.table-container {
+  text-align: left; 
+  display: flex;
+  margin-left: 12%;
+}
+
+.ingredient-table {
+  border-collapse: collapse;
+}
+
+.ready{
+  font-size:22px;
+}
+
+
+
 .header:hover 
 {
     background-color: #304e7a;
