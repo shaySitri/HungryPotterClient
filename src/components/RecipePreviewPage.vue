@@ -4,30 +4,16 @@
     
 
 
-      <img :src="recipe.image" class="image">
+      <img :src="recipe.image" class="image" width="500px" height="300px">
 
 
     <div class="middle">
-
-
-
-        <table align="left">
-        <div class="favoriteDisplay" v-show="user">
-            <b-icon-heart font-scale="1.6" opacity="0.7" v-show="!recipe.favorite" @click="addToFavorite()" ></b-icon-heart>
-            <b-icon-heart-fill font-scale="1.6" opacity="0.7" variant="danger" v-show="recipe.favorite" ></b-icon-heart-fill>
-        </div>
-      </table>
-      <table align="right">
-        <div class="watchedDisplay" v-show="user">
-          
-          <b-icon-eye font-scale="1.6" opacity="0.7" v-show="recipe.watched"  ></b-icon-eye>
-          <b-icon-eye-slash font-scale="1.6" opacity="0.7" v-show="!recipe.watched"></b-icon-eye-slash>
-        </div>
-      </table>
+        <b-icon-eye font-scale="1.6" opacity="0.7" v-show="recipe.watched && user"  class="watch-icon"></b-icon-eye>
+        <b-icon-eye-slash font-scale="1.6" opacity="0.7" v-show="!recipe.watched && user" class="watch-icon"></b-icon-eye-slash>
+        <b-icon-heart font-scale="1.6" opacity="0.7" v-show="!recipe.favorite && user" @click="addToFavorite()" class="fave-icon" ></b-icon-heart>
+        <b-icon-heart-fill font-scale="1.6" opacity="0.7" variant="danger" v-show="recipe.favorite && user" class="fave-icon"></b-icon-heart-fill>
   <br>
-  <b>{{  recipe.title }} </b>
-
-  <br>
+  <label class="recipe-title"><b>{{  recipe.title }} </b></label>
   <br>
        <table align="center">
     <tr>
@@ -58,19 +44,18 @@
       <td> {{ recipe.popularity }} Likes </td>
     </tr>
 
-
     </table>
       <br>
       <!-- <router-link :to="'/recipe/' + recipe.id"> <b-button id="goTo" variant="outline-secondary">Go to spell ></b-button> </router-link> -->
       <div>
-    <router-link v-if="/^\d+$/.test(recipe.id)" :to="'/recipe/' + recipe.id" exact>
-      <b-button id="goTo" variant="outline-secondary">Go to spell ></b-button>
+    <router-link v-if="/^\d+$/.test(recipe.id)" :to="'/recipe/' + recipe.id">
+      <b-button id="goTo" variant="outline-secondary" >Go to spell ></b-button>
     </router-link>
-    <router-link v-else-if="/^FA\d+$/.test(recipe.id)" :to="'/family/' + recipe.id" exact>
-      <b-button id="goTo1" variant="outline-secondary">Go to spell ></b-button>
+    <router-link v-else-if="/^FA\d+$/.test(recipe.id)" :to="'/family/' + recipe.id" exact class="go-to-but">
+      <b-button id="goTo1" variant="outline-secondary" >Go to spell ></b-button>
     </router-link>
-    <router-link v-else :to="'/myRecipes/' + recipe.id" exact>
-      <b-button id="goTo2" variant="outline-secondary">Go to spell ></b-button>
+    <router-link v-else :to="'/myRecipes/' + recipe.id" exact class="go-to-but">
+      <b-button id="goTo2" variant="outline-secondary" >Go to spell ></b-button>
     </router-link>
   </div>
       
@@ -157,7 +142,7 @@ export default {
   transition: .5s ease;
   backface-visibility: hidden;
   margin: auto;
-  border: 3px solid #000000;
+  border: 3px solid #27374e;
   border-radius: 3%;
 
 }
@@ -166,19 +151,21 @@ export default {
   transition: .5s ease;
   opacity: 0;
   position: absolute;
-  top: 50%;
+  top: 47%;
   left: 50%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   text-align: center;
-  width: 92%;
-  height: 80%;
+  width: 94%;
+  height: 93%;
   align-items: start;
   place-items: last baseline normal;
+  background-color: rgba(202, 193, 181, 0.603) ;
+  border-radius: 15px;
 }
 
 .container:hover > .image {
-  opacity: 0.3;
+  opacity: 1;
 }
 
 .container:hover > .middle {
@@ -187,11 +174,41 @@ export default {
 
 .text {
   background-color: #04AA6D;
-  color: white;
+  color: rgba(255, 255, 255, 0.808);
   font-size: 16px;
   padding: 16px 32px;
 }
 
+.recipe-title
+{
+  font-family: 'Harry Potter';
+}
+
+#goTo, #goTo1, #goTo2
+{
+  background-color: #965b38ab;
+  border-color: #965b38ab;
+  color: white;
+
+}
+
+#goTo:hover, #goTo1:hover, #goTo2:hover
+{
+  background-color: #66ac6f;
+  border-color: #66ac6f;
+
+}
+
+
+.watch-icon
+{
+  float: right;
+  margin-left: 10%;
+}
+.fave-icon
+{
+  float: left;
+}
 
 
 </style>

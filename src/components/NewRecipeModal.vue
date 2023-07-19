@@ -341,6 +341,33 @@ export default {
     border-color: #37713f;
 }
 
+.card .header:hover 
+{
+    background-color: #304e7a;
+
+}
+
+.card .header:focus
+{
+    background-color: #304e7a;
+
+}
+
+.collapse
+{
+  background-color: rgba(167, 211, 236, 0.185) ; 
+
+}
+.card 
+{
+  background-color: transparent;
+  border-color: transparent;
+  box-shadow: 0;
+}
+.card .header
+{
+  background-color: #8cb9d4bd
+}
 
 #add:hover, #reset:hover
 {

@@ -1,10 +1,74 @@
 <template>
   <div class="container">
-
-    <table align="left" id="randomCol">
+    <table>
+      <tr>
+        <td class="td1">
+          <label class="title" id="explore"> Explore the spells... </label>
+          <recipe-preview-list :recipes="randomRecipes" :user="username" ></recipe-preview-list>  
+          <b-icon-arrow-repeat font-scale="5" @click="random()" id="rand-icon"></b-icon-arrow-repeat>
+        </td>
+        <td class="td2">
+          <div v-if="username" class="div2">
+          <label class="title" id="explore"> Last watched... </label>
+          <recipe-preview-list :user="username" :recipes="lastWatched" ></recipe-preview-list>
+        </div>
+        <div v-else class="div2">
+          <router-link to="/login" ><label id="msg" class="floating" style="position: sticky" >
+            Hey Muggle! <br>
+          Forgot to login?
+          </label></router-link>
+        </div>
+        </td>
+      </tr>
+    </table>
+    <!-- <div>
       <label class="title" id="explore"> Explore the spells... </label>
+      <recipe-preview-list :recipes="randomRecipes" :user="username" ></recipe-preview-list>  
+      <b-icon-arrow-repeat font-scale="5" @click="random()" id="rand-icon"></b-icon-arrow-repeat>
+    </div>
+    <div v-if="username" class="div2">
+      <label class="title" id="explore"> Last watched... </label>
+      <recipe-preview-list :user="username" :recipes="lastWatched" ></recipe-preview-list>
+    </div>
+    <div v-else class="div2">
+      <router-link to="/login" ><label id="msg" class="floating" style="position: sticky" >
+        Hey Muggle! <br>
+      Forgot to login?
+      </label></router-link>
+    </div> -->
+    <!-- <table>
+      <tr>
+        <td>
+          <div>
+            <label class="title" id="explore"> Explore the spells... </label>
+            <recipe-preview-list :recipes="randomRecipes" :user="username" ></recipe-preview-list>  
+            <b-icon-arrow-repeat font-scale="5" @click="random()" id="rand-icon"></b-icon-arrow-repeat>
+          </div>
+        </td>
+        <td>
+          <div v-if="username">
+            <label class="title" id="explore"> Last watched... </label>
+            <recipe-preview-list :user="username" :recipes="lastWatched" ></recipe-preview-list>
+        </div>
+      </td>
+      <td>
+        <div v-if="!username">
+            <router-link to="/login" ><label id="msg" class="floating" style="position: sticky" >
+              Hey Muggle! <br>
+            Forgot to login?
+          </label></router-link>
+        </div>
+        </td>
+      </tr>
+    </table>
+     -->
+    <!-- <table align="left" id="randomCol">
+      <td>
+        <label class="title" id="explore"> Explore the spells... </label>
         <recipe-preview-list :recipes="randomRecipes" :user="username" ></recipe-preview-list>  
         <b-icon-arrow-repeat font-scale="5" @click="random()" id="rand-icon"></b-icon-arrow-repeat>
+      </td>
+
   
     </table>
     <table align="right">
@@ -22,7 +86,7 @@
           </tr>
         </div>
     </table>
-      
+       -->
 
 </div>
 </template>
@@ -117,7 +181,8 @@ methods:
 {
   font-family: "Harry Potter";
   font-size: 2.5vw;
-  margin-top: 115%;
+  margin-top: 80%;
+  margin-left: 30%;
   text-align: center;
   text-decoration: none;
     color: #37713f;
@@ -136,14 +201,34 @@ methods:
 
 #rand-icon
 {
-  margin-left: 40%;
+  margin-left: 28%;
   cursor: grab;
 }
 
 #explore
 {
-  margin-left: 15%;
+  margin-left: 10%;
   text-align: center;
+
+}
+table
+{
+  width: 100%;
+  margin: 0px;
+}
+.td1
+{
+  float: left;
+  width: 50%;
+}
+.td2
+{
+  float: right;
+  width: 50%;
+}
+.div2
+{
+  margin-left: 30%;
 
 }
 
