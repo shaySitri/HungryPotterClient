@@ -341,13 +341,13 @@ export default {
     border-color: #37713f;
 }
 
-.header:hover 
+.card .header:hover 
 {
     background-color: #304e7a;
 
 }
 
-.header:focus
+.card .header:focus
 {
     background-color: #304e7a;
 

@@ -47,7 +47,6 @@
           <template #button-content >
           <label id="label-hey">Hey {{ $root.store.shared_data.firstname}}</label>
           </template>
-          <b-dropdown-item class="drop-down-link">Profile</b-dropdown-item>
           <b-dropdown-item class="drop-down-link" @click="Logout">Sign Out</b-dropdown-item>
           </b-nav-item-dropdown>
         </span>
@@ -86,10 +85,7 @@ export default {
 
     show: function()
     {
-      console.log("clickkkkkkkkkkkkk")
       this.showAddRecipe = !this.showAddRecipe 
-      
-
     },
 
 

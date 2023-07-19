@@ -182,7 +182,6 @@ export default {
 .recipe-title
 {
   font-family: 'Harry Potter';
-  font-size: auto;
 }
 
 #goTo, #goTo1, #goTo2
