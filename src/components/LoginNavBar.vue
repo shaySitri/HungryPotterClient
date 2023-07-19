@@ -81,8 +81,8 @@ export default {
 
 #sub-but:hover
 {
-    background-color: #304e7a;
-    border-color: #304e7a;
+    background-color: #965b38ab;
+    border-color: #965b38ab;
 }
 
 

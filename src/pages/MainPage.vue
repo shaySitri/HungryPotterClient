@@ -1,12 +1,10 @@
 <template>
   <div class="container">
-    <h1 class="title">Main Page</h1>
-    <h1>LOOOOK AT MEEEE {{ username }}</h1>
 
     <table align="left" id="randomCol">
-      <h> <b> Explore the spells... </b></h>
+      <label class="title" id="explore"> Explore the spells... </label>
         <recipe-preview-list :recipes="randomRecipes" :user="username" ></recipe-preview-list>  
-        <b-icon-arrow-repeat font-scale="5" animation="cylon" @click="random()"></b-icon-arrow-repeat>
+        <b-icon-arrow-repeat font-scale="5" @click="random()" id="rand-icon"></b-icon-arrow-repeat>
   
     </table>
     <table align="right">
@@ -14,7 +12,14 @@
       <recipe-preview-list :user="username" :recipes="lastWatched" ></recipe-preview-list>
         </div>
         <div v-else>
-          <router-link v-if="!$root.store.username" to="/login" tag="button">You need to Login to vue this</router-link>
+          <tr>
+            <router-link to="/login" ><label id="msg" class="floating" style="position: sticky" >
+              Hey Muggle! <br>
+            Forgot to login?
+          </label></router-link>
+            
+
+          </tr>
         </div>
     </table>
       
@@ -89,6 +94,57 @@ methods:
 ::v-deep .blur .recipe-preview {
   pointer-events: none;
   cursor: default;
+}
+
+
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 20px #fff, 0 0 30px #856330e7, 0 0 40px #965b38ab, 0 0 50prgb(161, 100, 49)a6, 0 0 60px #885423, 0 0 70px #a57315, 0 0 80px #bd771c;
+  }
+  to {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff4800, 0 0 40px #52190b, 0 0 50px #99793d, 0 0 60px #4d372a, 0 0 70px #573100;
+
+  }
+}
+
+.msg-style a
+{
+  text-decoration: none;
+
+}
+
+#msg
+{
+  font-family: "Harry Potter";
+  font-size: 2.5vw;
+  margin-top: 115%;
+  text-align: center;
+  text-decoration: none;
+    color: #37713f;
+    cursor: grab;
+
+
+}
+
+#msg:hover
+{
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
+
+}
+
+#rand-icon
+{
+  margin-left: 40%;
+  cursor: grab;
+}
+
+#explore
+{
+  margin-left: 15%;
+  text-align: center;
+
 }
 
 </style>

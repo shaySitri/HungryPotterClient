@@ -1,39 +1,20 @@
 <template>
 <div>
 
-    <form class="">
-      <div class="form-group">
+    <div class="ing">
+        <b-input-group class="mb-2">
 
-        <div >
-          <input
-          v-model="ing.name" id="name"
-            type="text"
-            placeholder="Enter ingredient name" :disabled="disable"
-            />
-            <br>             
-
-
-
-
-          <input  type="number" min="1"  placeholder="Enter ingredient quantity" id="quantity"
-          v-model="ing.quantity"   :disabled="disable"
-          >
-
-          <br>
-
-          <select v-model="ing.unit" id="unit" type="text" :disabled="disable"
-           >
-                <option v-for="u in units" :key="u">{{ u }}</option>
-            </select>
-
-            <b-icon-plus-circle  scale="1.2" @click="submit()" v-show="!disable"></b-icon-plus-circle>    
-            <b-icon-x-circle scale="1.2" @click="$emit('del-ing', index)"></b-icon-x-circle>  
-
-
-        </div>
-      </div>
-    </form>
-
+          <b-form-input v-model="ing.name" id="name" type="text" placeholder="Name" :disabled="disable" class="input-field"></b-form-input>
+          <b-form-input type="number" min="1"  placeholder="Quantity" id="quantity" v-model="ing.quantity"   :disabled="disable" class="input-field"></b-form-input>
+          <b-form-select v-model="ing.unit" id="unit" type="text" :disabled="disable" :options="units" class="input-field"></b-form-select>
+          <b-form-button class="labelBut" disabled  id="icon-but">
+            <b-icon-plus-circle  scale="1.2" @click="submit()" v-show="!disable"></b-icon-plus-circle>
+          </b-form-button>   
+          <b-form-button class="labelBut" disabled id="icon-but">
+            <b-icon-x-circle scale="1.2" @click="$emit('del-ing', index)"></b-icon-x-circle>
+          </b-form-button>   
+        </b-input-group>
+    </div>
 </div>
 </template>
 
@@ -119,5 +100,13 @@ export default {
 </script>
 
 <style>
+#icon-but
+{
+    width: 10%
+}
+.ing
+{
+  margin-top: 2%;
+}
 
 </style>
