@@ -1,46 +1,63 @@
 <template>
-    <div>
-        <h1>FAMILY RECIPE!!!!!!</h1>
+    <div>       
+        <div class="content-container"> 
+          <div class="center-background">
         <div class="title">{{ preview.title }}</div>
-        <div class="ready">Ready in: {{ preview.readyInMinutes }} minutes <br></div>
+        <div class="ready"><b-icon icon="clock"></b-icon>
+          {{ preview.readyInMinutes }} minutes </div>
+        <div class="serving"> <b-icon icon="person-circle"></b-icon>
+          Servings: {{ servings }}<br></div>
         <table align="center">
           <tr>
               <th>
                 <td v-show="preview.vegan">
-                  <b-badge pill id=vegaanB >Vegan</b-badge>
+                  <b-badge class="size-badge" pill id=vegaanB >Vegan</b-badge>
                 </td>
                 <td v-show="preview.vegetarian">
-                  <b-badge pill id=vegiB >Vegiterian</b-badge>
+                  <b-badge class="size-badge" pill id=vegiB >Vegiterian</b-badge>
                 </td>
                 <td v-show="preview.glutenFree">
-                  <b-badge pill id=glutenFree >Gluten Free</b-badge>
+                  <b-badge class="size-badge" pill id=glutenFree >Gluten Free</b-badge>
                 </td>
                 <td v-show="!preview.glutenFree">
-                  <b-badge pill id=containGluten >Contain Gluten</b-badge>
+                  <b-badge class="size-badge" pill id=containGluten >Contain Gluten</b-badge>
                 </td>
               </th> 
           </tr>
-      </table>
-       
+      </table>  
+          <img :src="preview.image" class="image-recipe" />
+          <div class="ingredients">
+            <span class="labels">Ingredients:</span>
+            <div class="table-container">
+              <table class="ingredient-table">
+                <tbody>
+                  <tr v-for="ing in ingredients" :key="ing.name">
+                    <td><b-icon icon="basket2-fill"></b-icon> {{ ing.name }}, {{ ing.quantity }} {{ ing.unit }}.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
 
-        <img :src="preview.image" class="image" />        
-        <div class="ingredients"> 
-          <ul>
-            <li v-for="ing in ingredients" :key="ing.name">
-              {{ ing.name }}, {{ ing.quantity }}, {{ing.unit}}
-            </li>
-          </ul>
+          <div class="instructions">
+            <span class="labels">Instructions:</span>
+            <div class="table-container">
+              <table class=".ins-table-container">
+                <tbody>
+                  <tr v-for="(ins, index) in instructions" :key="ins.id">
+                    <td><span class="labels2">Step {{ index + 1 }}:</span></td>
+                    <td class="step-cell"> <br>{{ ins.step }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+            <div class="opt">
+               <br><br>{{ optional }}
+            </div>
+            </div>
+          </div>
         </div>
-        <div class="instructions"> 
-          <ul>
-            <li v-for="ins in instructions" :key="ins.id">
-              {{ ins.step }}
-            </li>
-          </ul>
-        </div>
-        <div 
-        class="opt"> optional: {{ optional }}</div>
-      </div>
       
 </template>
 
@@ -65,7 +82,6 @@ export default {
         response = await this.axios.get(
           this.$root.store.server_domain + `/users/myRecipes/family/${this.$route.params.recipeId}`
         );
-        // console.log(response.data,"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         if (response.status !== 200) this.$router.replace("/NotFound");
       } catch (error) {
         console.log("error.response.status", error.response.status);
@@ -97,34 +113,17 @@ export default {
 </script>
 
 <style scoped>
-.image {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 40%;
-}
 
-.title {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 45px;
-}
-.ready {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  
-}
 .opt {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  
+  display: block;
+  text-align: left;
 }
 
-h1 {
-  text-align: center;
+.size-badge {
+  font-size: 16px;
+  padding: 8px 19px; 
+  margin-bottom: 5px;
+  margin-top: 5px;
 }
 
 
