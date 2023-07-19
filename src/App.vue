@@ -7,7 +7,7 @@
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
-      <b-collapse id="nav-collapse" is-nav>
+      <!-- <b-collapse id="nav-collapse" is-nav> -->
       <b-navbar-nav>
         <b-nav-item class="nav-links" active-class="active"><router-link :to="{ name: 'main' }">Food Spells</router-link></b-nav-item>
         <b-nav-item class="nav-links" active-class="active"><router-link :to="{ name: 'search' }">Search</router-link></b-nav-item>
@@ -56,7 +56,7 @@
 
       
 
-</b-collapse>
+<!-- </b-collapse> -->
 </b-navbar>
 </div>
 <router-view />
@@ -99,7 +99,7 @@ export default {
   min-height: 100vh;
   font-size: larger;
 }
-.navbar-custom {
+.navbar-custom, {
     background-color: rgb(102, 177, 112, 0.7);
     fill-opacity: 0.7;
     font-weight: bold;

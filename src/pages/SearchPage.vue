@@ -1,8 +1,8 @@
 <template>
   <div class="searchDiv">
 
-    <h1 class="title">Search Page</h1>
-    <div>
+    <h1 class="title">Looking for a spell?</h1>
+    <div class="search-container">
     <br>
       <div align="center">
         <b-list-group>
@@ -13,7 +13,7 @@
                   <b-icon icon="search"></b-icon>
                 </b-input-group-prepend>
                 <b-form-input type="search" placeholder="Find a spell..." v-model="query" id="queryInput"></b-form-input>
-                <b-button variant="outline-primary" @click="lastSearch">Last Search</b-button>
+                <b-button class="buttons-search" @click="lastSearch">Last Search</b-button>
               </b-input-group>
             </b-list-group-item>
           </div>
@@ -40,7 +40,7 @@
           </b-list-group-item>
 
           <b-list-group-item>
-            <b-button variant="outline-success" @click="search" :disabled="!query">Search</b-button>
+            <b-button class="buttons-search" @click="search" :disabled="!query">Search</b-button>
           </b-list-group-item>
         </b-list-group>
 
@@ -214,6 +214,7 @@ export default {
 {
   width: 30%;
   align-content: center;
+  margin-bottom: 0.3%;
 }
 .accordion 
 {
@@ -224,5 +225,28 @@ export default {
 {
   text-align: center;
 }
+
+.buttons-search
+{
+  background-color: #37713f;
+}
+
+.buttons-search:hover
+{
+  background-color: #304e7a;
+  border-color: #304e7a;
+}
+
+.buttons-search:disabled {
+    background-color: #66ac6f;
+    border-color: #37713f;
+}
+
+.b-form-input
+{
+  background-color: #37713f;
+}
+
+
 
 </style>

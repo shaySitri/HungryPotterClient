@@ -1,11 +1,11 @@
 <template >
     <div class="accordion" >
 
-        <b-card no-body class="mb-1">
-              <b-card-header header-tag="header" class="p-1" role="tab">
-                <b-button block v-b-toggle="id" variant="outline-dark">  {{ name }}</b-button>
+        <b-card no-body class="mb-2" >
+              <b-card-header header-tag="header" class="p-1" role="tab" header="header-class"  >
+                <b-button block v-b-toggle="id"  class="header">  {{ name }}</b-button>
               </b-card-header>
-              <b-collapse :id="id" accordion="my-accordion" role="tabpanel">
+              <b-collapse :id="id" accordion="my-accordion" role="tabpanel" class="collapse">
                 <b-card-body v-if="type=='radio'" >
                   <b-form-radio-group @input="$emit('update',transferString)"
                     v-model="transferString"
@@ -77,7 +77,40 @@
 <style>
 .accordion
 {
-    width: 30%
+    width: 30%;
+
 }
+
+.header:hover 
+{
+    background-color: #304e7a;
+
+}
+
+.header:focus
+{
+    background-color: #304e7a;
+
+}
+
+.collapse
+{
+  background-color: rgba(167, 211, 236, 0.185) ; 
+
+}
+
+.header
+{
+  background-color: rgba(162, 209, 212, 0.568)
+}
+
+.card 
+{
+  background-color: transparent;
+  border-color: transparent;
+  box-shadow: 0;
+}
+
+
 </style>
   
