@@ -7,7 +7,6 @@
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
-      <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
         <b-nav-item class="nav-links" active-class="active"><router-link :to="{ name: 'main' }">Food Spells</router-link></b-nav-item>
         <b-nav-item class="nav-links" active-class="active"><router-link :to="{ name: 'search' }">Search</router-link></b-nav-item>
@@ -56,7 +55,6 @@
 
       </b-navbar-nav>
   
-</b-collapse>
 </b-navbar>
 
 </div>
@@ -121,7 +119,7 @@ export default {
   min-height: 100vh;
   font-size: larger;
 }
-.navbar-custom, #nav-collaps{
+.navbar-custom {
     background-color: rgb(102, 177, 112, 0.7);
     fill-opacity: 0.7;
     font-weight: bold;
@@ -155,7 +153,7 @@ export default {
 	height: 2px;
 	display: block;
 	margin: auto;
-	background: #304e7a;
+	background: #965b38ab;
 	transition: 0.5s;
 }
 
@@ -184,7 +182,6 @@ export default {
 #label-hey
 {
   color: #37713f;
-  // background-color: red;
 }
 
 .dropdown-menu.dropdown-menu { 
@@ -200,7 +197,7 @@ export default {
 
 .drop-down-link a:hover
 {
-  color: #304e7a;
+  color: #965b38ab;
   background-color: rgb(167, 211, 236, 0.4) ; 
 
 }
