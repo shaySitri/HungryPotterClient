@@ -7,15 +7,17 @@
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
-      <!-- <b-collapse id="nav-collapse" is-nav> -->
+      <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
         <b-nav-item class="nav-links" active-class="active"><router-link :to="{ name: 'main' }">Food Spells</router-link></b-nav-item>
         <b-nav-item class="nav-links" active-class="active"><router-link :to="{ name: 'search' }">Search</router-link></b-nav-item>
         <b-nav-item class="nav-links" active-class="active"><router-link :to="{ name: 'about' }">About</router-link></b-nav-item>
 
-        <b-nav-item class="nav-links" active-class="active" v-show="$root.store.shared_data.username"><router-link :to="{ name: 'newSpell' }">New Recipe</router-link></b-nav-item>
-
+        <b-nav-item class="nav-links" active-class="active" v-show="$root.store.shared_data.username">
+          <a class="nav-links" @click="show">Add New Recipe</a>
+        </b-nav-item>
         <b-nav-item-dropdown right v-show="$root.store.shared_data.username" toggle-class="nav-link-custom">
+          
           <template #button-content >
           <label id="label-hey">Personal Zone</label>
           </template>
@@ -33,7 +35,8 @@
 
         <span class="login-class">
           <b-nav-form right v-show="!$root.store.shared_data.username">
-          <login-nav-bar></login-nav-bar>
+          <login-nav-bar>
+          </login-nav-bar>
           <b-navbar-nav>
             <b-nav-item class="nav-links" id="reg"> <router-link :to="{ name: 'register' }">Register</router-link></b-nav-item>
           </b-navbar-nav>
@@ -52,27 +55,46 @@
 
 
       </b-navbar-nav>
-    
-
-      
-
-<!-- </b-collapse> -->
+  
+</b-collapse>
 </b-navbar>
+
 </div>
 <router-view />
+
+<new-recipe-modal :open="showAddRecipe" @close="showAddRecipe=!showAddRecipe"></new-recipe-modal>
+
   </div>
 </template>
 
 <script>
 import LoginNavBar from './components/LoginNavBar.vue';
-
+import NewRecipeModal from './components/NewRecipeModal.vue';
 export default {
   name: "App",
   components:
   {
-    LoginNavBar
+    LoginNavBar,
+    NewRecipeModal
   },
+  data() {
+    return {
+      showAddRecipe: false,
+
+    }
+  },
+
   methods: {
+
+    show: function()
+    {
+      console.log("clickkkkkkkkkkkkk")
+      this.showAddRecipe = !this.showAddRecipe 
+      
+
+    },
+
+
     Logout() {
       this.$root.store.shared_data.logout();
       this.$root.toast("Logout", "User logged out successfully", "success");
@@ -99,7 +121,7 @@ export default {
   min-height: 100vh;
   font-size: larger;
 }
-.navbar-custom, {
+.navbar-custom, #nav-collaps{
     background-color: rgb(102, 177, 112, 0.7);
     fill-opacity: 0.7;
     font-weight: bold;

@@ -17,22 +17,16 @@
           <router-link v-if="!$root.store.username" to="/login" tag="button">You need to Login to vue this</router-link>
         </div>
     </table>
-    
-
-  <button @click="show"> Add Recipe </button>
-    <new-recipe-modal v-show="showAddRecipe"></new-recipe-modal>
-  
+      
 
 </div>
 </template>
 
 <script>
-import NewRecipeModal from '../components/NewRecipeModal.vue';
 import RecipePreviewList from '../components/RecipePreviewList.vue';
 export default {
   components: {
     RecipePreviewList,
-    NewRecipeModal,
   },
   name: "Login",
   data(){
@@ -40,7 +34,6 @@ export default {
     username: "",
     randomRecipes: "",
     lastWatched: "",
-    showAddRecipe: false,
     };
   },
 mounted()
@@ -80,11 +73,6 @@ methods:
         console.log(error);
     }
     }, 
-
-    show: function()
-    {
-        this.showAddRecipe = !this.showAddRecipe 
-    }
 
 }
 };

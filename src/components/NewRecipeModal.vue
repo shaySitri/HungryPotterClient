@@ -2,8 +2,7 @@
     
     <div>
 
-        <div>
-        <b-button v-b-modal.modal-1 >Add New Recipe</b-button>
+        <div >
         <b-modal ref="modal" id="modal-1" title="Add New Recipe" hide-footer>
             <form>
                 Type:
@@ -75,6 +74,24 @@ export default {
     components:
     {
         Ingredient,
+    },
+    props: ['open'],
+    watch:
+    {
+        open()
+        {
+            if (this.open)
+            {
+                this.$refs.modal.show();
+                this.$emit('close')
+            }
+        }
+    },
+    mounted()
+    {
+        $('#modal-1').on('hide', function () {
+            this.$emit('close')
+        })
     },
     data() {
     return {

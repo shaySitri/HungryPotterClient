@@ -53,18 +53,21 @@
         </div>
     </div>
   </div>
+
+
   </div>
 </template>
 
 <script>
+
 import SearchFilter from '../components/SearchFilter.vue';
 import RecipePreviewList from '../components/RecipePreviewList.vue';
 export default {
   name: "Search",
   components: {
     RecipePreviewList,
-    SearchFilter
-  },
+    SearchFilter,
+    },
   data() {
     return {
       query: "",
@@ -88,6 +91,7 @@ export default {
           { text: '15', value: '15' }
       ],
       checkVar: [],
+
       
       
       }
@@ -102,12 +106,8 @@ export default {
       }
       
     },
-    watch:
-    {
 
-    },
     methods: {
-
       lastSearch()
       {
         console.log("DNE")
