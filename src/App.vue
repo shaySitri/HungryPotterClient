@@ -15,10 +15,13 @@
 
         <b-nav-item class="nav-links" active-class="active" v-show="$root.store.shared_data.username"><router-link :to="{ name: 'newSpell' }">New Recipe</router-link></b-nav-item>
 
-        <b-nav-item-dropdown text="Personal Zone" right v-show="$root.store.shared_data.username" toggle-class="nav-link-custom">
-          <b-dropdown-item class="nav-links"><router-link :to="{ name: 'myRecipes' }">My Food Spells</router-link></b-dropdown-item>
-          <b-dropdown-item class="nav-links"><router-link :to="{ name: 'family' }">Family Food Spells</router-link></b-dropdown-item>
-          <b-dropdown-item class="nav-links"><router-link :to="{ name: 'favorite' }">Favorite Spells</router-link></b-dropdown-item>
+        <b-nav-item-dropdown right v-show="$root.store.shared_data.username" toggle-class="nav-link-custom">
+          <template #button-content >
+          <label id="label-hey">Personal Zone</label>
+          </template>
+          <b-dropdown-item class="drop-down-link"><router-link :to="{ name: 'myRecipes' }">My Food Spells</router-link></b-dropdown-item>
+          <b-dropdown-item class="drop-down-link"><router-link :to="{ name: 'family' }">Family Food Spells</router-link></b-dropdown-item>
+          <b-dropdown-item class="drop-down-link"><router-link :to="{ name: 'favorite' }">Favorite Spells</router-link></b-dropdown-item>
         </b-nav-item-dropdown>
 
 
@@ -42,8 +45,8 @@
           <template #button-content >
           <label id="label-hey">Hey {{ $root.store.shared_data.firstname}}</label>
           </template>
-          <b-dropdown-item href="#">Profile</b-dropdown-item>
-          <b-dropdown-item @click="Logout">Sign Out</b-dropdown-item>
+          <b-dropdown-item class="drop-down-link">Profile</b-dropdown-item>
+          <b-dropdown-item class="drop-down-link" @click="Logout">Sign Out</b-dropdown-item>
           </b-nav-item-dropdown>
         </span>
 
@@ -161,6 +164,26 @@ export default {
   color: #37713f;
   // background-color: red;
 }
+
+.dropdown-menu.dropdown-menu { 
+    background-color: rgb(167, 211, 236, 0.4) ; 
+}
+
+.drop-down-link a
+{
+  color: #37713f;
+  text-decoration: none;
+
+}
+
+.drop-down-link a:hover
+{
+  color: #304e7a;
+  background-color: rgb(167, 211, 236, 0.4) ; 
+
+}
+
+
 
 
 
