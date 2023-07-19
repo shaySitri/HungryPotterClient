@@ -3,61 +3,123 @@
     <div>
 
         <div >
-        <b-modal ref="modal" id="modal-1" title="Add New Recipe" hide-footer>
+        <b-modal ref="modal" id="modal-1" hide-footer centered title="Add New Spell" title-class="titleC">
+            
             <form>
-                Type:
-                <b-form-select v-model="type" :options="typeOptions"></b-form-select> <br>
-                Title:
-                <b-form-input v-model="title" placeholder="Enter recipe title..."></b-form-input> <br>
-                Ready in:
-                <input v-model="readyInMintes" type="number" min="1" >
-                Minutes <br>
+                <div >
+                    <b-input-group class="mb-2">
+                        <b-form-button class="labelBut" disabled >Title</b-form-button>
+                        <b-form-input v-model="title" placeholder="Enter recipe title..."  class="input-field"></b-form-input>
 
-                Image Url:
-                <input v-model="image" type="text" >  <br>
-
-                Servings: 
-                <input v-model="servings" type="number" min="1" >  <br>
-
-
-                <input type="checkbox" id="vegan" :value="!vegan" v-model="vegan">
-                <label for="vegan">  Vegan </label> <br>
-
-                <input type="checkbox" id="vegiterian" :value="!vegeterian" v-model="vegeterian">
-                <label for="vegiterian"> Vegiterian </label> <br>
-
-                <input type="checkbox" id="glutenFree" :value="!glutenFree" v-model="glutenFree">
-                <label for="glutenFree"> Gluten Free </label> <br>
-
-
-                <div v-for="(item, i) in ingredients" :key="item">
-                    <ingredient :ing='item' :index="i"
-                    @add-new-ing="addNewIng($event)" @del-ing="delIng($event)"> </ingredient>
+                        
+                    </b-input-group>
                 </div>
-                
+                <div>
+                    <b-input-group class="mb-2">
+                        <b-form-button class="labelBut" disabled >Type</b-form-button>
+                        <b-form-select v-model="type" :options="typeOptions" placeholder="Pick a type" class="input-field"></b-form-select>
+                    </b-input-group>
 
-                Instructions:
-                <div v-for="(inst,index) in instructions" :key="inst">
-                    {{ index + 1 }}<input type="text" required v-model="inst.instruction">
-                    <b-icon-plus-circle  scale="1.2" @click="addInstrction()" v-show="!disable"></b-icon-plus-circle>  
-                    <b-icon-x-circle v-show="index==instructions.length-1" scale="1.2" @click="delInstruction(index)"></b-icon-x-circle>  
+                </div>
+                <div id="readyIn">
+                    <b-input-group class="mb-2">
+                        <b-form-button class="labelBut" disabled >Ready In</b-form-button>
+                        <b-form-input v-model="readyInMintes" placeholder="Enter prepare time..." type="number" class="input-field"></b-form-input>
+                        <b-form-button class="labelBut" disabled id="minutes">Minutes</b-form-button>
+
+                    </b-input-group>
+                </div>
+                <div id="imgUrl">
+                    <b-input-group class="mb-2">
+                        <b-form-button class="labelBut" disabled >Image URL</b-form-button>
+                        <b-form-input v-model="image" type="text"  placeholder="Enter image url..." class="input-field"></b-form-input>
+                    </b-input-group>
+                </div>
+                <div id="servings">
+                    <b-input-group class="mb-2">
+                        <b-form-button class="labelBut" disabled >Servings</b-form-button>
+                        <b-form-input v-model="servings" type="number" min="1" placeholder="Enter number of servings..." class="input-field"></b-form-input>
+                    </b-input-group>
+                </div>
+                <br>
+
+
+                <div>
+                    <table align="center">
+                        <tr>
+                            <td class="group"><b-form-checkbox v-model="vegan" switch>Vegan</b-form-checkbox></td>
+                            <td class="group"><b-form-checkbox v-model="vegeterian" switch>Vegiterian</b-form-checkbox></td>
+                            <td class="group"><b-form-checkbox v-model="glutenFree" switch>Gluten Free</b-form-checkbox></td>
+                        </tr>
+                    </table>
+                    
 
                 </div>
 
 
                 <br>
-                <div v-show="type=='Family'">
-                    Optional Description: <br>
-                    <textarea  v-model="optionalDescription"></textarea>
-                
-                </div>
-            </form>
-            
-            <div>
-                <b-button @click="addRecipe()">Add Recipe</b-button>
+
+                <div  role="tablist">
+                    <b-card no-body class="mb-1">
+                    <b-card-header header-tag="header-class" class="p-1" role="tab">
+                        <b-button class="header" block v-b-toggle.accordion-1 >Ingredients</b-button>
+                    </b-card-header>
+                    <b-collapse id="accordion-1" accordion="my-accordion" role="tabpanel" class="collapse">
+                        <div v-for="(item, i) in ingredients" :key="item">
+                        <ingredient :ing='item' :index="i"
+                        @add-new-ing="addNewIng($event)" @del-ing="delIng($event)"> </ingredient>
+                        </div>
+                    </b-collapse>
+                    </b-card>
+
+                    <b-card no-body class="mb-2">
+                    <b-card-header header-tag="header" class="p-1" role="tab">
+                        <b-button block v-b-toggle.accordion-2 class="header">Instructions</b-button>
+                    </b-card-header>
+                    <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel" class="collapse">
+                        <div v-for="(inst,index) in instructions" :key="inst">
+                        <b-input-group class="inst">
+                        <b-form-button class="labelBut" id="inst-but" disabled >{{ index + 1 }}</b-form-button>   
+                        <b-form-input type="text" required v-model="inst.instruction" class="input-field"></b-form-input>
+                        <b-form-button class="labelBut" disabled  id="icon-but">
+                            <b-icon-plus-circle  scale="1.2" @click="addInstrction()" v-show="!disable">
+                            </b-icon-plus-circle
+                        ></b-form-button>   
+                        <b-form-button class="labelBut" disabled id="icon-but">
+                            <b-icon-x-circle v-show="index==instructions.length-1" scale="1.2" @click="delInstruction(index)" ></b-icon-x-circle>
+                        </b-form-button>   
+                        </b-input-group>
+                    </div>
+                    </b-collapse>
+                    </b-card>
+
+                    <b-card no-body class="mb-1" v-show="type=='Family'">
+                    <b-card-header header-tag="header" class="p-1" role="tab">
+                        <b-button block v-b-toggle.accordion-3 class="header">Optional Description</b-button>
+                    </b-card-header>
+                    <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel" class="collapse">
+                            <b-form-textarea
+                            id="textarea"
+                            v-model="optionalDescription"
+                            placeholder="Enter something..."
+                            rows="3"
+                            max-rows="6"
+                            ></b-form-textarea>
+                    </b-collapse>
+                    </b-card>
             </div>
 
-            <b-alert show variant="danger" v-show="dangerAlert">Danger Alert</b-alert>
+            </form>
+            
+            <br>
+
+
+            <b-button @click="addRecipe()" id="add">Add Recipe</b-button>
+            <b-button @click="resetData()" id="reset">Reset</b-button>
+
+            <br>
+
+            <b-alert show variant="danger" v-show="dangerAlert">Erorrcrux! fill all fields... <b-icon-emoji-angry variant="danger"></b-icon-emoji-angry></b-alert>
 
         </b-modal>
         </div>
@@ -229,6 +291,68 @@ export default {
 </script>
     
 <style>
+#readyIn
+{
+    width: 100%;
+}
+.group
+{
+    width: 35%
+}
 
+.labelBut
+{
+    border: 2px solid #8cb9d4bd;
+    background-color: transparent;
+    width: 25%;
+    border-radius: 5px;
+    text-align: center;
+    align-content: center;
+    padding-top: 1%;
+}
+.input-group .input-field
+{
+    border: 2px solid #8cb9d4bd;
+    border-radius: 7px;
+
+    /* background-color: #66ac6f; */
+}
+
+
+#inst-but
+{
+    width: 15%
+}
+#icon-but
+{
+    width: 10%
+}
+.inst
+{
+	float: left;
+}
+#reset
+{
+	float: right;
+}
+
+#add, #reset {
+    background-color: #90c497;
+    border-color: #37713f;
+}
+
+
+#add:hover, #reset:hover
+{
+  background-color: #304e7a;
+  border-color: #304e7a;
+}
+
+.titleC
+{
+    font-family: 'Harry Potter';
+    font-size: 1.5vw;
+    margin-left: 27%;
+}
 </style>
 

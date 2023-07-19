@@ -101,7 +101,7 @@
 
 .header
 {
-  background-color: rgba(162, 209, 212, 0.568)
+  background-color: #8cb9d4bd
 }
 
 .card 

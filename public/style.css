@@ -39,3 +39,33 @@ body
   background-size: 90%;
   background-attachment: fixed;
 }
+
+.header:hover 
+{
+    background-color: #304e7a;
+
+}
+
+.header:focus
+{
+    background-color: #304e7a;
+
+}
+
+.collapse
+{
+  background-color: rgba(167, 211, 236, 0.185) ; 
+
+}
+
+.header
+{
+  background-color: #8cb9d4bd
+}
+
+.card 
+{
+  background-color: transparent;
+  border-color: transparent;
+  box-shadow: 0;
+}

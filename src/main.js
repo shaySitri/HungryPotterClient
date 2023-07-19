@@ -33,6 +33,10 @@ import { VBHover } from 'bootstrap-vue'
 Vue.directive('b-hover', VBHover)
 import { BFormRadioGroup } from 'bootstrap-vue'
 Vue.component('b-form-radio-group', BFormRadioGroup)
+import { BFormSpinbutton } from 'bootstrap-vue'
+Vue.component('b-form-spinbutton', BFormSpinbutton)
+import { FormTextareaPlugin } from 'bootstrap-vue'
+Vue.use(FormTextareaPlugin)
 
 import Vuelidate from "vuelidate";
 import "bootstrap/dist/css/bootstrap.css";

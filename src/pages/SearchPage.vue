@@ -32,7 +32,7 @@
           </b-list-group-item>
 
           <b-list-group-item>
-            <search-filter name="Sort By" id="sort" type="radio" :options="sortOptions" :lastRes="sort" @update="(res) => sort = res"></search-filter>
+            <search-filter name="Sortinghat" id="sort" type="radio" :options="sortOptions" :lastRes="sort" @update="(res) => sort = res"></search-filter>
           </b-list-group-item>
 
           <b-list-group-item>
