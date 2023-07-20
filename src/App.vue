@@ -3,7 +3,10 @@
     
     <div>
       <b-navbar toggleable="lg" type="dark" class="navbar navbar-custom" >
-      <b-navbar-brand class="mb-0" href="#" id="navTitle">Hungry Potter</b-navbar-brand>
+      <!-- <b-navbar-brand class="mb-0" href="#" id="navTitle">Hungry Potter</b-navbar-brand> -->
+      <router-link :to="{ name: 'main' }" class="navbar-brand mb-0" id="navTitle">
+      Hungry Potter
+    </router-link>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 

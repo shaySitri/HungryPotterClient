@@ -40,7 +40,7 @@
         type="submit"
         variant="primary"
         style="width:100px;display:block;"
-        class="mx-auto w-100"
+        class="mx-auto w-100 custom-button"
         >Login</b-button
       >
       <div class="mt-2">
@@ -134,5 +134,18 @@ export default {
 <style lang="scss" scoped>
 .container {
   max-width: 400px;
+  // background-color: rgba(167, 211, 236, 0.15)
 }
+
+.custom-button {
+  background-color: #37713f;
+  border-color: #37713f;
+  color: white; /* Set the desired text color */
+}
+
+.custom-button:hover {
+  background-color: #965b38ab;
+  border-color: #965b38ab;
+}
+
 </style>
