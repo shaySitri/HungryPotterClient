@@ -95,7 +95,6 @@ export default {
       try {
         
         const response = await this.axios.post(
-          // "https://test-for-3-2.herokuapp.com/user/Login",
           this.$root.store.server_domain +"/Login",
 
           {
@@ -103,11 +102,7 @@ export default {
             password: this.form.password
           }
         );
-        // console.log(response);
-        // this.$root.loggedIn = true;
-        console.log(this.username)
 
-        console.log(this.$root.store.shared_data.login);
         let firstname = await this.axios.get(
         this.$root.store.server_domain +"/users/privateName")
         this.$root.store.shared_data.login(this.form.username, firstname);
@@ -118,14 +113,11 @@ export default {
       }
     },
     onLogin() {
-      // console.log("login method called");
       this.form.submitError = undefined;
       this.$v.form.$touch();
       if (this.$v.form.$anyError) {
         return;
       }
-      // console.log("login method go");
-
       this.Login();
     }
   }

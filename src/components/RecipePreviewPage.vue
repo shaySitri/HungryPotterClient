@@ -115,7 +115,6 @@ export default {
               this.randomRecipes = arrayRecipes;
               this.recipe.favorite = true;
               } catch (error) {
-
               console.log(error);
               }
           }

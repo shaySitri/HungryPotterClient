@@ -83,18 +83,15 @@ export default {
         this.$emit('new-ing',ingredient)
     },
     submit() {
-      console.log('submit!')
       this.$v.$touch()
       if (this.$v.$invalid) {
         this.submitStatus = 'ERROR'
-        console.log('err')
       } else {
         this.disable = true;
         this.$emit('add-new-ing')
       }
 
     },
-
   }
 }
 </script>

@@ -245,9 +245,7 @@ export default {
     }
   },
   mounted() {
-    // console.log("mounted");
     this.countries.push(...countries);
-    // console.log($v);
   },
   methods: {
     validateState(param) {
@@ -257,7 +255,6 @@ export default {
     async Register() {
       try {
         const response = await this.axios.post(
-          // "https://test-for-3-2.herokuapp.com/user/Register",
           this.$root.store.server_domain + "/register",
 
           {
@@ -271,22 +268,16 @@ export default {
           }
         );
         this.$router.push("/login");
-        // console.log(response);
       } catch (err) {
         console.log(err.response);
         this.form.submitError = err.response.data.message;
       }
     },
     onRegister() {
-      // console.log("register method called");
       this.$v.form.$touch();
       if (this.$v.form.$anyError) {
         return;
       }
-
-      console.log(this.form.username)
-
-      // console.log("register method go");
       this.Register();
     },
     onReset() {
@@ -309,7 +300,6 @@ export default {
 <style lang="scss" scoped>
 .container {
   max-width: 500px;
-  //  background-color: rgba(167, 211, 236, 0.25)
 }
 
 .custom-button {

@@ -72,7 +72,6 @@ export default {
         response = await this.axios.get(
           this.$root.store.server_domain + `/users/myRecipes/${this.$route.params.recipeId}`
         );
-        console.log(response.data)
         if (response.status !== 200) this.$router.replace("/NotFound");
       } catch (error) {
         console.log("error.response.status", error.response.status);

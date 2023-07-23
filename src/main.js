@@ -109,10 +109,8 @@ const shared_data = {
     localStorage.setItem("firstname", firstname.data);
     this.firstname = firstname.data
     localStorage.setItem("lastsearch", "");
-    console.log("login", this.username, this.firstname);
   },
   logout() {
-    console.log("logout");
     localStorage.removeItem("username");
     localStorage.removeItem("firstname");
     localStorage.removeItem("lastsearch");
@@ -123,14 +121,10 @@ const shared_data = {
   },
   search(lastsearch)
   {
-    console.log("search")
     localStorage.setItem("lastsearch", lastsearch);
     this.lastsearch = lastsearch;
   }
 };
-
-console.log(shared_data);
-// Vue.prototype.$root.store = shared_data;
 
 new Vue({
   router,

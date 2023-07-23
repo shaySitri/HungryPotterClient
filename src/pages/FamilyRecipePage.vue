@@ -88,7 +88,6 @@ export default {
       this.preview = response.data.recipeDetails;
       let _instructions = response.data.instructions;
       this.optional = response.data.optional;
-      console.log(response.data)
       for (let i = 0; i < _instructions.length; i++)
       {
         this.instructions.push(

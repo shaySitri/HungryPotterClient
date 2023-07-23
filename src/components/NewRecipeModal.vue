@@ -283,7 +283,6 @@ export default {
         } catch (err) {
             console.log("RES", err.response);
             this.dangerAlert = true;
-            
         }
 
     },

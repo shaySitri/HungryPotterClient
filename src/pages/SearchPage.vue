@@ -110,7 +110,6 @@ export default {
     methods: {
       lastSearch()
       {
-        console.log("DNE")
         this.query = this.lastSearchQuery.query
         if (this.lastSearchQuery.cuisine != "")
         {
@@ -187,7 +186,6 @@ export default {
         for (let i = 0; i < this.results.length; i++)
         {
           this.results[i].image = `https://spoonacular.com/recipeImages/${this.results[i].id}-556x370.jpg`
-          console.log(this.results[i].image)
         }
         
         
