@@ -5,14 +5,19 @@
     <table align="center" id="myCol">  
         <recipe-preview-list :recipes="userRecipes" :user="username" ></recipe-preview-list>    
     </table>
+    <not-found v-show="userRecipes.length == 0" text="You didn't write any spells..."></not-found>
+
 </div>
 </template>
 
 <script>
 import RecipePreviewList from '../components/RecipePreviewList.vue';
+import NotFound from '../components/NotFound.vue';
+
 export default {
   components: {
     RecipePreviewList,
+    NotFound,
   },
   data(){
   return {
@@ -40,7 +45,6 @@ methods:
 
         console.log(error);
     }
-
     }
 
 }
