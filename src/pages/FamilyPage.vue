@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <!-- <h1 class="title">Family food spells</h1> -->
     <h1 class="title">{{ $root.store.shared_data.firstname }}'s family food spells!</h1>
 
     <table align="center" id="familyCol">  
