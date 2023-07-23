@@ -21,7 +21,7 @@ Devolped with vueJS.
 <img src="/public/addnewspell.jpg"><img>
 ## Personal Pages
 #Empty:
-<img src="">/public/err12.jpg<img>
+<img src="/public/err12.jpg"><img>
 #Full:
 <img src=""><img>
 ## Spell Page
