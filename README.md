@@ -16,7 +16,7 @@ Devolped with vueJS.
 ## Food Spells (home path)
 <img src=""><img>
 ## Search
-<img src=""><img>
+<img src="/public/search.jpg"><img>
 ## Add New Recipe
 <img src=""><img>
 ## Personal Pages
