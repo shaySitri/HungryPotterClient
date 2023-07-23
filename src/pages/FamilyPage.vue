@@ -1,10 +1,9 @@
 <template>
   <div class="container">
-    <h1 class="title">Family Page</h1>
-    <h1>{{ username }}'s family food spells!</h1>
+    <!-- <h1 class="title">Family food spells</h1> -->
+    <h1 class="title">{{ $root.store.shared_data.firstname }}'s family food spells!</h1>
 
     <table align="center" id="familyCol">  
-      <h> <b> famm... </b></h>
         <recipe-preview-list :recipes="userFamilyRecipes" :user="username" ></recipe-preview-list>    
     </table>
 </div>

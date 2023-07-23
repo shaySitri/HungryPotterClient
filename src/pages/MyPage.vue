@@ -1,10 +1,8 @@
 <template>
   <div class="container">
-    <h1 class="title">My recipes Page</h1>
-    <h1>{{ username }}'s food spells!</h1>
+    <h1 class="title">{{  $root.store.shared_data.firstname }}'s food spells!</h1>
 
     <table align="center" id="myCol">  
-      <h> <b> my... </b></h>
         <recipe-preview-list :recipes="userRecipes" :user="username" ></recipe-preview-list>    
     </table>
 </div>
@@ -37,10 +35,7 @@ methods:
         const response = await this.axios.get(
         this.$root.store.server_domain + "/users/myRecipes");
         this.userRecipes = response.data;
-        // console.log(resUser)
-        // for (let i=0; i<resUser.length; i++){
-        //   this.userRecipes.push(resUser[i].preview);
-        // }
+
     } catch (error) {
 
         console.log(error);

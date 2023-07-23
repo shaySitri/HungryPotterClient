@@ -4,7 +4,7 @@
 
         <div >
         <b-modal ref="modal" id="modal-1" hide-footer centered title="Add New Spell" title-class="titleC">
-            
+            <div style="max-height: 550px; overflow-y: auto;">
             <form>
                 <div >
                     <b-input-group class="mb-2">
@@ -110,6 +110,7 @@
             </div>
 
             </form>
+        </div>
             
             <br>
 
@@ -253,7 +254,8 @@ export default {
         
         let instructionList = []
         for(let i=0; i< this.instructions.length;i++){
-            instructionList.push(this.instructions[i].instruction)
+            if(this.instructions[i].instruction != "")
+                instructionList.push(this.instructions[i].instruction)
         }
         let recipeInstructions = instructionList.join('^')
         try {
@@ -291,6 +293,27 @@ export default {
 </script>
     
 <style>
+
+
+/* For WebKit-based browsers */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #8cb9d4bd;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: lightblue;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+
 #readyIn
 {
     width: 100%;

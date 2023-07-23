@@ -1,47 +1,23 @@
 <template>
   <div class="container">
-    <h1 class="title">Favorite Page</h1>
-    <h1>{{ username }}'s favorite food spells!</h1>
-
-    <!-- randomCol -->
+    <h1 class="title">{{  $root.store.shared_data.firstname }}'s favorite food spells!</h1>
     <table align="center" id="favoriteCol">  
-      <h> <b> favvvvvvvvvv... </b></h>
-        <recipe-preview-list :recipes="userFavorites" :user="username" ></recipe-preview-list>  
-        <!-- <b-icon-arrow-repeat font-scale="5" animation="cylon" @click="isFavorite()"></b-icon-arrow-repeat> -->
-  
+        <recipe-preview-list :recipes="userFavorites" :user="username" ></recipe-preview-list>    
     </table>
-    <!-- <table align="right">
-        <div v-if="username">
-      <recipe-preview-list :user="username" :recipes="lastWatched" ></recipe-preview-list>
-        </div>
-        <div v-else>
-          <router-link v-if="!$root.store.username" to="/login" tag="button">You need to Login to vue this</router-link>
-        </div> -->
-    <!-- </table> -->
-    
-
-  <!-- <button @click="show"> Add Recipe </button>
-    <new-recipe-modal v-show="showAddRecipe"></new-recipe-modal> -->
   
 
 </div>
 </template>
 
 <script>
-// import NewRecipeModal from '../components/NewRecipeModal.vue';
 import RecipePreviewList from '../components/RecipePreviewList.vue';
 export default {
   components: {
     RecipePreviewList,
-    // NewRecipeModal,
   },
-//   name: "Login",
   data(){
   return {
     username: "",
-    // randomRecipes: "",
-    // lastWatched: "",
-    // showAddRecipe: false,
     userFavorites: [],
     };
   },
@@ -56,29 +32,7 @@ mounted()
 },
 methods:
 {
-    // async random() {
-    // try {
-    //     const response = await this.axios.get(
-    //     this.$root.store.server_domain + "/randomRecipes");
-        
-    //     let arrayRecipes = response.data.randRecipes;
-    //     this.randomRecipes = arrayRecipes;
-    // } catch (error) {
-
-    //     console.log(error);
-    // }
-    // },
-    // async getLastWatched() {
-    // try {
-    //     const response = await this.axios.get(
-    //     this.$root.store.server_domain + "/users/lastViews");
-    //     // this.allWtached = response.data;
-    //     this.lastWatched = response.data.reverse().splice(-3);
-    // } catch (error) {
-
-    //     console.log(error);
-    // }
-    // }, 
+  
     async isFavorite() {
     try {
         const response = await this.axios.get(
@@ -91,10 +45,6 @@ methods:
 
         console.log(error);
     }
-    // }, 
-    // show: function()
-    // {
-    //     this.showAddRecipe = !this.showAddRecipe 
     }
 
 }
