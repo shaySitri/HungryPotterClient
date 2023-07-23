@@ -131,7 +131,6 @@ export default {
 }
 
 
-
 .nav-links a
 {
   color: #37713f;
@@ -199,9 +198,6 @@ export default {
   background-color: rgb(167, 211, 236, 0.4) ; 
 
 }
-
-
-
 
 
 </style>

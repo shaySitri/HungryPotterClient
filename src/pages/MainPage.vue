@@ -68,7 +68,6 @@ methods:
     try {
         const response = await this.axios.get(
         this.$root.store.server_domain + "/users/lastViews");
-        // this.allWtached = response.data;
         this.lastWatched = response.data.reverse().splice(-3).reverse();
     } catch (error) {
 
@@ -85,7 +84,7 @@ methods:
   margin: 10px 0 10px;
 }
 .blur {
-  -webkit-filter: blur(5px); /* Safari 6.0 - 9.0 */
+  -webkit-filter: blur(5px); 
   filter: blur(2px);
 }
 ::v-deep .blur .recipe-preview {

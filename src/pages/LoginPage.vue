@@ -128,7 +128,7 @@ export default {
 .custom-button {
   background-color: #37713f;
   border-color: #37713f;
-  color: white; /* Set the desired text color */
+  color: white; 
 }
 
 .custom-button:hover {
