@@ -1,1 +1,27 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-718a45dd9cf7e7f842a935f5ebbe5719a5e09af4491e668f4dbf3b35d5cca122.svg)](https://classroom.github.com/online_ide?assignment_repo_id=11344169&assignment_repo_type=AssignmentRepo)
+
+# Hungry Potter - Client Side
+
+This project contain client side of SWA recipes web.
+Devolped with vueJS.
+
+## Authors
+
+- [@it4i](https://www.github.com/it4i) Itai Carmel - 208909416
+- [@shaySitri](https://www.github.com/shaySitri) Shay Sitri - 209405042
+
+
+
+
+
+## Food Spells (home path)
+<img src=""><img>
+## Search
+<img src=""><img>
+## Add New Recipe
+<img src=""><img>
+## Personal Pages
+<img src=""><img>
+## Spell Page
+<img src=""><img>
+## About
+<img src="/public/about.jpg"><img>
