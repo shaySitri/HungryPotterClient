@@ -6,14 +6,18 @@
     <table align="center" id="familyCol">  
         <recipe-preview-list :recipes="userFamilyRecipes" :user="username" ></recipe-preview-list>    
     </table>
+    <not-found v-show="userFamilyRecipes.length == 0" text="No family's spells to display..."></not-found>
+
 </div>
 </template>
 
 <script>
 import RecipePreviewList from '../components/RecipePreviewList.vue';
+import NotFound from '../components/NotFound.vue';
 export default {
   components: {
     RecipePreviewList,
+    NotFound,
   },
   data(){
   return {

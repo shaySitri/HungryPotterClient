@@ -10,8 +10,8 @@
     <div class="middle">
         <b-icon-eye font-scale="1.6" opacity="0.7" v-show="recipe.watched && user"  class="watch-icon"></b-icon-eye>
         <b-icon-eye-slash font-scale="1.6" opacity="0.7" v-show="!recipe.watched && user" class="watch-icon"></b-icon-eye-slash>
-        <b-icon-heart font-scale="1.6" opacity="0.7" v-show="!recipe.favorite && user" @click="addToFavorite()" class="fave-icon" ></b-icon-heart>
-        <b-icon-heart-fill font-scale="1.6" opacity="0.7" variant="danger" v-show="recipe.favorite && user" class="fave-icon"></b-icon-heart-fill>
+        <b-icon-heart font-scale="1.6" opacity="0.7" v-show="!recipe.favorite && user && faveSign" @click="addToFavorite()" class="fave-icon" ></b-icon-heart>
+        <b-icon-heart-fill font-scale="1.6" opacity="0.7" variant="danger" v-show="recipe.favorite && user && faveSign" class="fave-icon"></b-icon-heart-fill>
   <br>
   <label class="recipe-title"><b>{{  recipe.title }} </b></label>
   <br>
@@ -46,7 +46,6 @@
 
     </table>
       <br>
-      <!-- <router-link :to="'/recipe/' + recipe.id"> <b-button id="goTo" variant="outline-secondary">Go to spell ></b-button> </router-link> -->
       <div>
     <router-link v-if="/^\d+$/.test(recipe.id)" :to="'/recipe/' + recipe.id">
       <b-button id="goTo" variant="outline-secondary" >Go to spell ></b-button>
@@ -79,7 +78,7 @@ export default {
         image_load: false,
         nutritionBagesArray: [],
         isHovered: false,
-        isFave: false,
+        faveSign: /^[0-9]+$/.test(this.recipe.id),
         };
     },
     props: {
@@ -96,7 +95,7 @@ export default {
         {
           type: String,
           required: true
-        }
+        },
 
     },
     methods:
@@ -120,7 +119,7 @@ export default {
           }
 
 
-    }
+    },
 };
 
 </script>

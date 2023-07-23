@@ -4,6 +4,8 @@
     <table align="center" id="favoriteCol">  
         <recipe-preview-list :recipes="userFavorites" :user="username" ></recipe-preview-list>    
     </table>
+    <not-found v-show="userFavorites.length == 0" text="No favorite spells to display..."></not-found>
+    
   
 
 </div>
@@ -11,9 +13,11 @@
 
 <script>
 import RecipePreviewList from '../components/RecipePreviewList.vue';
+import NotFound from '../components/NotFound.vue';
 export default {
   components: {
     RecipePreviewList,
+    NotFound,
   },
   data(){
   return {

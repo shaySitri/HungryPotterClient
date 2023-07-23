@@ -60,10 +60,16 @@ export default {
             this.$root.store.shared_data.login(this.username, firstname);
             this.$emit('logged')
             this.$root.toast("Login", "User logged in successfully", "success");
-            location.reload();
+            this.$router.push("/");
+            // location.reload();
 
         } catch (err) {
             console.log(err.response);
+            this.$root.toast("Login", "User failed to login.", "danger");
+            this.username = "";
+            this.password = "";
+            this.$router.push("/Login");
+
         }
         },
         

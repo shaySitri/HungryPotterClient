@@ -279,6 +279,14 @@ export default {
         if (response.status === 200) {
             this.$refs.modal.hide();
             this.resetData();
+            if( this.type = "Family"){
+                this.$router.push("/Family");
+                location.reload();
+            }
+            else{
+                this.$router.push("/myRecipes");
+                location.reload();
+            }
         }
         } catch (err) {
             console.log("RES", err.response);

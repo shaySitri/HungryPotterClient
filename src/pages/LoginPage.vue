@@ -57,9 +57,6 @@
     >
       Login failed: {{ form.submitError }}
     </b-alert>
-    <!-- <b-card class="mt-3" header="Form Data Result">
-      <pre class="m-0">{{ form }}</pre>
-    </b-card> -->
   </div>
 </template>
 
@@ -126,7 +123,6 @@ export default {
 <style lang="scss" scoped>
 .container {
   max-width: 400px;
-  // background-color: rgba(167, 211, 236, 0.15)
 }
 
 .custom-button {
