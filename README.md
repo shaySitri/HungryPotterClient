@@ -15,6 +15,12 @@ Welcome to the **client-side** of the **Hungry Potter** project! This applicatio
 
 ---
 
+### 👥 **Authors**
+- **Itay Carmel** (📧: carmelit@post.bgu.ac.il)
+- **Shay Sitri** (📧: sitri@post.bgu.ac.il)
+
+---
+
 
 ### ⚙️ **Features**
 
