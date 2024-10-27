@@ -1,16 +1,43 @@
+# **Hungry Potter - Client** 🧙‍♂️🍲
 
-# Hungry Potter - Client Side
+🔗 **Repository URL**: [HungryPotterClient](https://github.com/shaySitri/HungryPotterClient)
 
-This project contain client side of SWA recipes web.
-Devolped with vueJS.
+---
 
-## Authors
+### 🌐 **Server Repository**
+This client connects to the server-side backend repository for data interactions.  
+🔗 **[HungryPotterServer repository](https://github.com/shaySitri/HungryPotterServer)**.
 
-- [@it4i](https://www.github.com/it4i) Itai Carmel - 208909416
-- [@shaySitri](https://www.github.com/shaySitri) Shay Sitri - 209405042
+---
+
+### 📜 **Project Overview**
+Welcome to the **client-side** of the **Hungry Potter** project! This application provides a recipe-based user interface that lets users browse, search, and view detailed recipes. This client communicates with the **Hungry Potter Server** for data and user interactions, creating a seamless, recipe-focused experience.
+
+---
 
 
-### Some pictures from our website:
+### ⚙️ **Features**
+
+#### 🔍 Recipe Search
+Users can easily search for recipes by category, ingredient, and cuisine.
+
+#### 📑 Recipe Details
+Displays detailed recipes, ingredients, and step-by-step instructions.
+
+#### 🧭 Intuitive Navigation
+Ensures a user-friendly, visually engaging experience.
+
+---
+
+### 🛠️ **Technologies**
+- **Framework**: Vue.js 2.x ⚙️
+- **Routing**: Vue Router 📡
+- **HTTP Client**: Axios 🌐
+
+---
+
+### 📸 Screenshots
+
 ## Food Spells (home path)
 <img src="/public/foodspells.jpg"><img>
 ## Search
