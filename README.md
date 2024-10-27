@@ -10,14 +10,15 @@ This client connects to the server-side backend repository for data interactions
 
 ---
 
-### 📜 **Project Overview**
-Welcome to the **client-side** of the **Hungry Potter** project! This application provides a recipe-based user interface that lets users browse, search, and view detailed recipes. This client communicates with the **Hungry Potter Server** for data and user interactions, creating a seamless, recipe-focused experience.
-
----
-
 ### 👥 **Authors**
 - **Itay Carmel** (📧: carmelit@post.bgu.ac.il)
 - **Shay Sitri** (📧: sitri@post.bgu.ac.il)
+
+---
+
+### 📜 **Project Overview**
+Welcome to the **client-side** of the **Hungry Potter** project! This application provides a recipe-based user interface that lets users browse, search, and view detailed recipes. This client communicates with the **Hungry Potter Server** for data and user interactions, creating a seamless, recipe-focused experience.
+
 
 ---
 
